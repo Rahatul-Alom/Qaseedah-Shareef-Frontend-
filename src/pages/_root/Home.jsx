@@ -5,7 +5,7 @@ import {
 } from "@/lib/actions";
 import { Sections } from "@/components";
 
-export default function Discover() {
+export default function Home() {
   const {
     data: recentPlayed,
     isPending: isRecentPlayedDataPending,
@@ -29,7 +29,7 @@ export default function Discover() {
   const { releases } = newReleases || {};
 
   return (
-    <section className="discover_page">
+    <section className="home_page">
       <div className="flex flex-col gap-y-16">
         {recentPlayed && recentPlayed?.length ? (
           <div className="relative">
@@ -37,7 +37,7 @@ export default function Discover() {
               data={recentPlayed}
               title="Recent Played"
               titleType="large"
-              subTitle="Rediscover the Soundtrack of Your Moments."
+              subTitle="Rehome the Soundtrack of Your Moments."
               type="playlist"
               gridNumber={3}
               cardItemNumber={9}
@@ -51,8 +51,8 @@ export default function Discover() {
 
         <Sections.MediaSection
           data={playlists?.data}
-          title="Discover"
-          subTitle="Explore sonic realms with our Discover feature."
+          title="home"
+          subTitle="Explore sonic realms with our home feature."
           type="playlist"
           cardItemNumber={10}
           isLoading={isTopChartDataPending}
@@ -62,7 +62,7 @@ export default function Discover() {
         <Sections.MediaSection
           data={artists?.data}
           title="Suggested Artists"
-          subTitle="Discover new sounds with handpicked artists tailored to your taste."
+          subTitle="home new sounds with handpicked artists tailored to your taste."
           skeletonItemNumber={5}
           randomListNumber={5}
           cardItemNumber={10}
@@ -84,7 +84,7 @@ export default function Discover() {
         <Sections.MediaSection
           data={releases?.data}
           title="New Releases"
-          subTitle="Discover fresh and latest soundscapes in our collection."
+          subTitle="home fresh and latest soundscapes in our collection."
           cardItemNumber={10}
           type="album"
           isLoading={isNewReleaseDataPending}

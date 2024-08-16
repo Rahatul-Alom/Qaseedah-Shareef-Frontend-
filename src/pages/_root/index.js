@@ -1,4 +1,4 @@
-export { default as Discover } from "./Discover";
+export { default as home } from "./Home";
 export { default as Browse } from "./Browse";
 export { default as Genre } from "./Genre";
 export { default as Artist } from "./Artist";

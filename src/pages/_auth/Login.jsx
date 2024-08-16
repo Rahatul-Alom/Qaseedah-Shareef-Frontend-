@@ -6,11 +6,14 @@ import { loginValidation } from "@/lib/validations";
 
 import { Form } from "@/components";
 
+
 export default function Login() {
   const { isSubmitting, login } = useLogin();
 
-  const handleSubmit = (values) => {
+  const handleSubmit = async (values) => {
     login(values);
+    
+  
   };
 
   const list = useMemo(() => {

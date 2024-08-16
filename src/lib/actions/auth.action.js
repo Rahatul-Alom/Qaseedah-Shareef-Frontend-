@@ -19,6 +19,7 @@ import { useCurrentUser } from "@/lib/store";
 import { fbSetDoc } from "@/lib/helpers";
 import { useNotification } from "@/hooks";
 import { auth, googleProvider, githubProvider } from "@/configs";
+import axios from "axios";
 
 export const useAuthState = () => {
   const {
@@ -79,6 +80,7 @@ export const useLogin = () => {
     mutationFn: async (values) => {
       try {
         await signInWithEmailAndPassword(auth, values?.email, values?.password);
+
       } catch (err) {
         console.error("error", err?.code);
         notify({

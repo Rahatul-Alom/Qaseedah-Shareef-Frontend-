@@ -171,7 +171,7 @@ export default function Profile() {
             <section className="account_page">
               <Title
                 name="Account"
-                desc="Discover your sound identity. Share your musical journey in a vibrant profile."
+                desc="home your sound identity. Share your musical journey in a vibrant profile."
                 type="large"
               />
               <div className="flex flex-col gap-y-10 text-onNeutralBg">

@@ -372,11 +372,11 @@ const Logo = ({ isFolded, isHorizontal }) => {
               : ""
           }
         >
-          <Icon
+          {/* <Icon
             name={logo.icon}
             size={25}
             className={showFull ? "!text-white" : "!text-primary"}
-          />
+          /> */}
         </div>
 
         <h1

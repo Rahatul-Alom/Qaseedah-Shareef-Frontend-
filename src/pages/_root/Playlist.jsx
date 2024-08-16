@@ -18,7 +18,7 @@ export default function Playlist() {
   const { tracks } = playlists || {};
 
   if (!section || !id || !allowedSection.includes(section)) {
-    return <Navigate to="/discover" replace />;
+    return <Navigate to="/home" replace />;
   }
 
   return (

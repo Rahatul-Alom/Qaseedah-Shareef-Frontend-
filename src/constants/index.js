@@ -2,7 +2,7 @@ export const navlinks = [
   {
     name: "Home",
     subLinks: [
-      { name: "Discover", to: "/discover", icon: "BiPlayCircle" },
+      { name: "home", to: "/home", icon: "BiPlayCircle" },
       { name: "Browse", to: "/browse", icon: "RiListIndefinite" },
       { name: "Search", to: "/search", icon: "FaSearchengin" },
     ],
@@ -28,6 +28,6 @@ export const navlinks = [
 ];
 
 export const logo = {
-  name: "GrooveIT",
+  name: "Qaseedah Shareef",
   icon: "PiMusicNoteFill",
 };

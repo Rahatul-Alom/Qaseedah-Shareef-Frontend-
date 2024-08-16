@@ -99,9 +99,9 @@ const Sidebar = () => {
         name: "Menu",
         subLinks: [
           {
-            id: "discover",
-            name: "Discover",
-            to: "/discover",
+            id: "home",
+            name: "Home",
+            to: "/home",
             icon: "BiPlayCircle",
             tooltip: "hover",
           },
@@ -156,53 +156,53 @@ const Sidebar = () => {
               ]),
         ],
       },
-      {
-        name: "Account",
-        subLinks: [
-          ...(user
-            ? [
-                {
-                  id: "profile",
-                  name: "Profile",
-                  to: "/profile",
-                  icon: "BiUser",
-                  tooltip: "hover",
-                },
-                {
-                  id: "notifications",
-                  name: "Notifications",
-                  to: "/notifications",
-                  icon: "IoMdNotificationsOutline",
-                  badgeCount: 3,
-                  tooltip: "hover",
-                },
-                {
-                  id: "logout",
-                  name: "Logout",
-                  to: "/logout",
-                  onClick: signOut,
-                  icon: "MdLogout",
-                  tooltip: "hover",
-                },
-              ]
-            : [
-                {
-                  id: "sign_up",
-                  name: "Sign Up",
-                  to: "/register",
-                  icon: "BiUser",
-                  tooltip: "hover",
-                },
-                {
-                  id: "sign_in",
-                  name: "Sign In",
-                  to: "/login",
-                  icon: "MdLogin",
-                  tooltip: "hover",
-                },
-              ]),
-        ],
-      },
+      // {
+      //   name: "Account",
+      //   subLinks: [
+      //     ...(user
+      //       ? [
+      //           {
+      //             id: "profile",
+      //             name: "Profile",
+      //             to: "/profile",
+      //             icon: "BiUser",
+      //             tooltip: "hover",
+      //           },
+      //           {
+      //             id: "notifications",
+      //             name: "Notifications",
+      //             to: "/notifications",
+      //             icon: "IoMdNotificationsOutline",
+      //             badgeCount: 3,
+      //             tooltip: "hover",
+      //           },
+      //           {
+      //             id: "logout",
+      //             name: "Logout",
+      //             to: "/logout",
+      //             onClick: signOut,
+      //             icon: "MdLogout",
+      //             tooltip: "hover",
+      //           },
+      //         ]
+      //       : [
+      //           {
+      //             id: "sign_up",
+      //             name: "Sign Up",
+      //             to: "/register",
+      //             icon: "BiUser",
+      //             tooltip: "hover",
+      //           },
+      //           {
+      //             id: "sign_in",
+      //             name: "Sign In",
+      //             to: "/login",
+      //             icon: "MdLogin",
+      //             tooltip: "hover",
+      //           },
+      //         ]),
+      //   ],
+      // },
     ];
   }, [user]);
 

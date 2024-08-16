@@ -1,6 +1,6 @@
 import { Navigate, createBrowserRouter } from "react-router-dom";
 import {
-  Discover,
+  home,
   Browse,
   Genre,
   Artist,
@@ -25,10 +25,10 @@ export const router = createBrowserRouter([
         element: <RootLayout />,
         errorElement: <Error />,
         children: [
-          { index: true, element: <Navigate to="/discover" replace /> },
+          { index: true, element: <Navigate to="/home" replace /> },
           {
-            path: "/discover",
-            element: <Discover />,
+            path: "/home",
+            element: <home />,
           },
           {
             path: "/browse",
