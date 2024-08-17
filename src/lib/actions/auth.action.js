@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import {
@@ -8,7 +8,6 @@ import {
   getRedirectResult,
   onAuthStateChanged,
   sendPasswordResetEmail,
-  signInWithEmailAndPassword,
   signInWithRedirect,
   signOut,
   updateProfile,
@@ -20,6 +19,8 @@ import { fbSetDoc } from "@/lib/helpers";
 import { useNotification } from "@/hooks";
 import { auth, googleProvider, githubProvider } from "@/configs";
 import axios from "axios";
+import { PiStackSimple } from "react-icons/pi";
+
 
 export const useAuthState = () => {
   const {
@@ -72,14 +73,23 @@ export const useAuthState = () => {
 export const useLogin = () => {
   const [notify] = useNotification();
 
+  // const [email, setEmail] = useState('');
+  // const [password, setPassword] = useState('');
+
   const {
     mutate: login,
     isPending: isSubmitting,
     isSuccess: isSubmitted,
   } = useMutation({
-    mutationFn: async (values) => {
+    mutationFn: async ({ email, password }) => {
       try {
-        await signInWithEmailAndPassword(auth, values?.email, values?.password);
+        // Sign in with Firebase Authentication
+        // await signInWithEmailAndPassword(auth, values.email, values.password);
+
+        const response = await axios.post('http://127.0.0.1:8000/api/v1/login', {email, password});
+
+        // Handle response
+        console.log(response.data);
 
       } catch (err) {
         console.error("error", err?.code);

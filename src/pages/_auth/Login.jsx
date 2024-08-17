@@ -1,17 +1,39 @@
 import { useMemo } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import { useLogin } from "@/lib/actions";
 import { loginValidation } from "@/lib/validations";
 
 import { Form } from "@/components";
+import axios from "axios";
+import { toast } from "react-toastify";
 
 
 export default function Login() {
   const { isSubmitting, login } = useLogin();
+  const navigate = useNavigate();
+
 
   const handleSubmit = async (values) => {
     login(values);
+    console.log(values)
+
+    await axios.post('http://127.0.0.1:8000/api/v1/login',(values))
+    .then(res => {
+      console.log(res.data)
+      if(res.data.success){
+        toast.success('user logedin successfull')
+        navigate(location?.state ? location?.state : "/" )
+      }
+      else{
+        console.error();
+        
+      }
+    })
+    .catch( error =>{
+      console.log(error)
+      toast(error.message)
+  })
     
   
   };
@@ -36,6 +58,8 @@ export default function Login() {
       },
     ];
   }, []);
+
+  // console.log(list)
 
   return (
     <section className="login_section">

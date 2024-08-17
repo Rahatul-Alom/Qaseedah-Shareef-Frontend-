@@ -62,7 +62,7 @@ export default function AuthLayout() {
 
                 <Title
                   name={title || ""}
-                  desc="to continue to Groove"
+                  desc="To continue to Qaseedah Shareef"
                   type="medium"
                 />
 

@@ -4,7 +4,7 @@ import { Icon } from "..";
 
 const socialAuthList = [
   { name: "Google", strategy: "oauth_google", icon: "FcGoogle" },
-  { name: "Github", strategy: "oauth_github", icon: "FaGithub" },
+  // { name: "Github", strategy: "oauth_github", icon: "FaGithub" },
 ];
 
 const SocialAuthButton = ({
