@@ -1,29 +1,52 @@
 import { useMemo } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import { useRegister } from "@/lib/actions";
 import { registerValidation } from "@/lib/validations";
 
 import { Form } from "@/components";
+import axios from "axios";
+import { toast } from "react-toastify";
+
 
 export default function Register() {
   const { isSubmitting, register } = useRegister();
+  const navigate = useNavigate();
+
 
   const handleSubmit = async (values) => {
-    await register(values);
+     register(values);
+     console.log(values)
+
+    // // create user entry in database
+    //   const userInfo = {
+    //      name: data.name,
+    //       email: data.email
+    //     }
+
+    await axios.post('http://127.0.0.1:8000/api/v1/register',(values))
+      .then(res => {
+      localStorage.setItem('token',res.data.token);
+      axios.defaults.headers.common['Authorization'] = `Bearer ${res.data.token}`;
+      console.log(res.data)
+      if(res.data.insertedId){
+        
+        toast.success('user register successfull')
+        navigate("/" )
+      }
+      else{
+        console.error();
+        
+      }
+    })
+    .catch( error =>{
+      console.log(error.response.data)
+      toast(error.message)
+  })
   };
 
   const list = useMemo(() => {
     return [
-      {
-        type: "input",
-        name: "email",
-        label: "Email Address",
-        props: {
-          type: "email",
-          placeholder: "",
-        },
-      },
       {
         type: "input",
         name: "username",
@@ -33,7 +56,15 @@ export default function Register() {
           placeholder: "",
         },
       },
-
+      {
+        type: "input",
+        name: "email",
+        label: "Email Address",
+        props: {
+          type: "email",
+          placeholder: "",
+        },
+      },
       {
         type: "input",
         name: "password",
@@ -62,12 +93,12 @@ export default function Register() {
       </div>
       <div className="flex-col gap-2 mt-4 text-sm flex_justify_center text-onNeutralBg">
         <div>
-          No account?{" "}
+          All ready have an account?{" "}
           <Link
             to="/login"
             className="text-primary hover:underline underline-offset-2"
           >
-            Sign up
+            Sign in
           </Link>
         </div>
       </div>

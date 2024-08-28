@@ -20,6 +20,8 @@ export default function Login() {
 
     await axios.post('http://127.0.0.1:8000/api/v1/login',(values))
     .then(res => {
+      localStorage.setItem('token',res.data.token);
+      axios.defaults.headers.common['Authorization'] = `Bearer ${res.data.token}`;
       console.log(res.data)
       if(res.data.success){
         toast.success('user logedin successfull')
@@ -90,12 +92,12 @@ export default function Login() {
           </Link>
         </div>
         <div>
-          Have an account?{" "}
+          No Account?{" "}
           <Link
             to="/register"
             className="text-primary hover:underline underline-offset-2"
           >
-            Sign in
+            Sign Up
           </Link>
         </div>
       </div>

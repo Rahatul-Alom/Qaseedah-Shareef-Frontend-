@@ -134,7 +134,7 @@ const ChangePassword = ({ isPasswordEnabled }) => {
               className="!text-yellow-500"
               size={16}
             />
-            Accounts authenticated with Google Oauth cannot update password!
+            Accounts enticated with Google O cannot update password!
           </span>
         )}
       </div>
