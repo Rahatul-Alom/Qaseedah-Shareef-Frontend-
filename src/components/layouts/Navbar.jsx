@@ -209,7 +209,7 @@ const UserMenu = () => {
   const { currentUser } = useCurrentUser();
 
   const { user } = currentUser || {};
-  const { email, username, imageUrl } = user || {};
+  const { email, name, imageUrl } = user || {};
   const { logout: signOut } = useLogout();
 
   const navigate = useNavigate();
@@ -243,9 +243,9 @@ const UserMenu = () => {
               <div className="p-3 text-sm rounded bg-main">
                 <h5 className="text-lg font-semibold">
                   {getTimeOfDay()},{" "}
-                  <span className="font-normal capitalize">{username}</span>
+                  <span className="font-normal capitalize">{name}</span>
                 </h5>
-                {/* <p className="text-base">@{username}</p> */}
+                {/* <p className="text-base">@{name}</p> */}
                 <span className="text-secondary">{email}</span>
               </div>
             )}

@@ -8,7 +8,7 @@ export const registerValidation = yup
       .min(3, { message: "Minimum 3 characters." })
       .max(250, { message: "Maximum 250 caracters." })
       .required(),
-    username: yup
+    name: yup
       .string()
       .trim()
       .min(3, { message: "Minimum 3 characters." })
@@ -23,7 +23,7 @@ export const loginValidation = yup
     email: yup
       .string()
       .trim()
-      .matches(/^(?!@)[^\s]+(?<!@)$/, "Invalid email or username")
+      .matches(/^(?!@)[^\s]+(?<!@)$/, "Invalid email or name")
       .required(),
 
     password: yup
@@ -39,7 +39,7 @@ export const forgetPassCreateValidation = yup
     email: yup
       .string()
       .trim()
-      .matches(/^(?!@)[^\s]+(?<!@)$/, "Invalid email or username")
+      .matches(/^(?!@)[^\s]+(?<!@)$/, "Invalid email or name")
       .required(),
   })
   .required();
@@ -49,7 +49,7 @@ export const forgetPassResetValidation = yup
     email: yup
       .string()
       .trim()
-      .matches(/^(?!@)[^\s]+(?<!@)$/, "Invalid email or username")
+      .matches(/^(?!@)[^\s]+(?<!@)$/, "Invalid email or name")
       .required(),
     password: yup
       .string()

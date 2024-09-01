@@ -19,6 +19,9 @@ import { useCurrentUser } from "@/lib/store";
 import { fbSetDoc } from "@/lib/helpers";
 import { useNotification } from "@/hooks";
 import { auth, googleProvider, githubProvider } from "@/configs";
+import axios from "axios";
+import { toast } from "react-toastify";
+
 
 export const useAuthState = () => {
   const {
@@ -26,69 +29,87 @@ export const useAuthState = () => {
     userProfile: profile,
     getUserProfile,
   } = useCurrentUser();
+  // const navigate = useNavigate();
 
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, async (user) => {
-      if (user) {
-        const isPasswordEnabled = user?.providerData
-          .reduce((acc, item) => {
-            acc.push(item.providerId);
-            return acc;
-          }, [])
-          ?.includes("password");
+    const token = localStorage.getItem('token');
 
-        const {
-          uid,
-          displayName: username,
-          email,
-          metadata,
-          photoURL: imageUrl,
-        } = user;
+    if (token) {
+      // Log the token for debugging purposes
+      console.log("Token found:", token);
+
+      axios.get('http://127.0.0.1:8000/api/v1/user', {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .then(response => {
+        console.log("API response:", response.data); // Log the API response
+
+        const { data } = response;
 
         getCurrentUser({
-          userId: profile && uid,
+          userId: profile && data.id,
           user: {
             ...profile,
-            uid,
-            username,
-            email,
-            metadata,
-            imageUrl,
-            isPasswordEnabled,
+            uid: data.id,
+            name: data.name,
+            email: data.email,
+            imageUrl: data.imageUrl, // Adjust based on actual response structure
           },
           isLoading: false,
           isLoaded: true,
         });
-      } else {
+      })
+      .catch(error => {
+        console.error('Token validation failed:', error);
+
+        localStorage.removeItem('token');
         getCurrentUser({ isLoaded: true, isLoading: false });
         getUserProfile(null);
-      }
-    });
-    return unsubscribe;
-  }, [getCurrentUser, profile]);
+
+        // navigate('/login');
+      });
+    } else {
+      console.log("No token found.");
+      getCurrentUser({ isLoaded: true, isLoading: false });
+      getUserProfile(null);
+
+      // navigate('/login');
+    }
+  }, [getCurrentUser, profile, getUserProfile]);
 };
 
 export const useLogin = () => {
-  const [notify] = useNotification();
-
+  // const [notify] = useNotification();
+  const navigate = useNavigate();
   const {
     mutate: login,
     isPending: isSubmitting,
     isSuccess: isSubmitted,
   } = useMutation({
     mutationFn: async (values) => {
-      try {
-        await signInWithEmailAndPassword(auth, values?.email, values?.password);
-      } catch (err) {
-        console.error("error", err?.code);
-        notify({
-          title: "Error",
-          variant: "error",
-          description: err?.code,
+        await axios.post('http://127.0.0.1:8000/api/v1/login',(values))
+        .then(res => {
+          if(res.data.success){
+            console.log(res.data)
+            localStorage.setItem('token',res.data.data.token);
+             axios.defaults.headers.common['Authorization'] = `Bearer ${res.data.data.token}`;
+            toast.success('user logedin successfull')
+            navigate(location?.state ? location?.state : "/" )
+          }
+          else{
+            console.error();
+            
+          }
+        })
+        .catch( error =>{
+          console.log(error)
+          toast(error.message)
         });
       }
     },
-  });
+  );
 
   return { isSubmitting, isSubmitted, login };
 };
@@ -110,7 +131,7 @@ export const useRegister = () => {
         );
 
         await updateProfile(auth.currentUser, {
-          displayName: values.username,
+          displayName: values.name,
         });
 
         await fbSetDoc({
@@ -118,7 +139,7 @@ export const useRegister = () => {
           id: authResp.user?.uid,
           data: {
             email: authResp.user.email,
-            username: values.username,
+            name: values.name,
             prefs: {},
           },
         });
@@ -180,10 +201,10 @@ export const useSocialAuthSignUpRedirect = () => {
         const user = result?.user;
 
         if (user && result) {
-          const username = user?.displayName.split(" ")[0];
+          const name = user?.displayName.split(" ")[0];
 
           await updateProfile(auth.currentUser, {
-            displayName: username,
+            displayName: name,
           });
 
           await fbSetDoc({
@@ -191,7 +212,7 @@ export const useSocialAuthSignUpRedirect = () => {
             id: user?.uid,
             data: {
               email: user.email,
-              username: username,
+              name: name,
               photoURL: user.photoURL,
               prefs: {},
             },
@@ -209,23 +230,39 @@ export const useSocialAuthSignUpRedirect = () => {
 export const useLogout = () => {
   const { getCurrentUser } = useCurrentUser();
 
-  const {
+ const {
     mutate: logout,
     isPending: isSubmitting,
     isSuccess: isSubmitted,
   } = useMutation({
     mutationFn: async () => {
       try {
-        getCurrentUser({
-          isLoaded: true,
-          isLoading: false,
+        // Call the Laravel API to log out
+        const response = await axios.post('http://127.0.0.1:8000/api/v1/logout', {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem('token')}`,
+          },
         });
-        await signOut(auth);
+
+        if (response.data.success) {
+          // Clear user data and remove token from local storage
+          getCurrentUser({
+            isLoaded: true,
+            isLoading: false,
+          });
+          localStorage.removeItem('token');
+          delete axios.defaults.headers.common['Authorization'];
+          console.log('Logout successful');
+        } else {
+          // Handle unsuccessful logout
+          console.error('Logout failed');
+        }
       } catch (err) {
-        // console.log(err);
+        console.error('Logout error:', );
       }
     },
   });
+
 
   return { isSubmitting, isSubmitted, logout };
 };

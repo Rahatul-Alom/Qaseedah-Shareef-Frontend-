@@ -10,7 +10,7 @@ import {
 } from "@firebase/auth";
 
 import { useCurrentUser } from "@/lib/store";
-import { fbUpdateDoc, uploadImage, fbSnapshotDoc } from "@/lib/helpers";
+import { fbUpdateDoc, uploadImage, } from "@/lib/helpers";
 import { useNotification } from "@/hooks";
 import { auth } from "@/configs";
 
@@ -30,13 +30,13 @@ export const useGetProfile = () => {
       getUserProfile(doc?.data());
     };
 
-    const unsub = fbSnapshotDoc({
-      collection: "users",
-      id: user?.uid,
-      callback,
-    });
+    // const unsub = fbSnapshotDoc({
+    //   collection: "users",
+    //   id: user?.uid,
+    //   callback,
+    // });
 
-    return () => unsub;
+    // return () => unsub;
   }, [setPlayerLS, setThemeLS, user?.uid]);
 
   return prof;
@@ -67,11 +67,11 @@ export const useUpdateProfile = () => {
 
           await updateProfile(auth.currentUser, {
             photoURL: profileImage,
-            displayName: values?.username,
+            displayName: values?.name,
           });
 
           await fbUpdateDoc({
-            data: { username: values?.username, photoURL: profileImage },
+            data: { name: values?.name, photoURL: profileImage },
             collection: "users",
             id: userId,
           });

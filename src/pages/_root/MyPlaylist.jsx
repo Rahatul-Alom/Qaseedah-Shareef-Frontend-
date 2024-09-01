@@ -51,7 +51,7 @@ export default function MyPlaylist() {
           {user ? (
             <div>
               <Sections.MyPlaylistBannerSection
-                details={{ ...details, user: user?.username }}
+                details={{ ...details, user: user?.name }}
                 tracks={playlistTracks}
                 showPattern
               />

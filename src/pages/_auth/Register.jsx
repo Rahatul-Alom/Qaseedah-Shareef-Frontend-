@@ -18,21 +18,12 @@ export default function Register() {
      register(values);
      console.log(values)
 
-    // // create user entry in database
-    //   const userInfo = {
-    //      name: data.name,
-    //       email: data.email
-    //     }
-
     await axios.post('http://127.0.0.1:8000/api/v1/register',(values))
       .then(res => {
-      localStorage.setItem('token',res.data.token);
-      axios.defaults.headers.common['Authorization'] = `Bearer ${res.data.token}`;
       console.log(res.data)
-      if(res.data.insertedId){
-        
+      if(res.data.success){
         toast.success('user register successfull')
-        navigate("/" )
+        navigate("/Login" )
       }
       else{
         console.error();
@@ -49,8 +40,8 @@ export default function Register() {
     return [
       {
         type: "input",
-        name: "username",
-        label: "Username",
+        name: "name",
+        label: "name",
         props: {
           type: "text",
           placeholder: "",
@@ -69,6 +60,12 @@ export default function Register() {
         type: "input",
         name: "password",
         label: "Password",
+        props: { type: "password", placeholder: "" },
+      },
+      {
+        type: "input",
+        name: "password_confirmation",
+        label: "Confirm Password",
         props: { type: "password", placeholder: "" },
       },
     ];

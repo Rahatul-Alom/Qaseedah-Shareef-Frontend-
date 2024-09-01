@@ -3,7 +3,7 @@ import * as yup from "yup";
 export const editProfileValidation = yup
   .object({
     email: yup.string().trim().email(),
-    username: yup
+    name: yup
       .string()
       .trim()
       .min(3, { message: "Minimum 3 characters." })

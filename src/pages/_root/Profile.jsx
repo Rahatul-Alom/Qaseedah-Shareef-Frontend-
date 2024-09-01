@@ -15,7 +15,7 @@ const EditProfile = ({ details }) => {
 
   const handleSubmit = async (values) => {
     updateUserProfile({
-      username: values.username,
+      name: values.name,
       files,
     });
   };
@@ -35,8 +35,8 @@ const EditProfile = ({ details }) => {
       },
       {
         type: "input",
-        name: "username",
-        label: "Username",
+        name: "name",
+        label: "name",
         props: {
           type: "text",
           placeholder: "",
@@ -70,7 +70,7 @@ const EditProfile = ({ details }) => {
         files={files}
         setFiles={setFiles}
         defaultValues={{
-          username: details?.username,
+          name: details?.name,
           email: details?.email,
           image: details?.imageUrl,
         }}
@@ -178,7 +178,7 @@ export default function Profile() {
                 <EditProfile
                   details={{
                     email: user?.email,
-                    username: user?.username,
+                    name: user?.name,
                     imageUrl: user?.imageUrl,
                   }}
                 />

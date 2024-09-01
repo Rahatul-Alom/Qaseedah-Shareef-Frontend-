@@ -15,7 +15,7 @@ const User = () => {
   const { currentUser } = useCurrentUser();
 
   const { user } = currentUser || {};
-  const { email, username, imageUrl } = user || {};
+  const { email, name, imageUrl } = user || {};
 
   return (
     <Link
@@ -32,7 +32,7 @@ const User = () => {
 
       {email && (
         <div className="flex flex-col flex-1 text-sm">
-          <span className="">@{username}</span>
+          <span className="">@{name}</span>
           <span className="break-all text-secondary">{email}</span>
         </div>
       )}

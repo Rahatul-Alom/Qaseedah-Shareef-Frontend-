@@ -26,7 +26,7 @@ export default function ThemeProvider({ children }) {
   }, [isMobile, userId]);
 
   if (!theme?.color) {
-    return <>Loading..</>;
+    return <>Loading rrr..</>;
   }
 
   return (

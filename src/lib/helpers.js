@@ -24,8 +24,8 @@ import {
 
 import { db, storage } from "@/configs";
 
-const DEEZER_API_URL = import.meta.env.VITE_PUBLIC_DEEZER_API_URL;
-const CORS_URL = import.meta.env.VITE_PUBLIC_CORS_URL;
+// const DEEZER_API_URL = import.meta.env.VITE_PUBLIC_DEEZER_API_URL;
+// const CORS_URL = import.meta.env.VITE_PUBLIC_CORS_URL;
 
 export const uploadImage = async ({ imageFile, storagePath, fileName }) => {
   const compressImgOption = {

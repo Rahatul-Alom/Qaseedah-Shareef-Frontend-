@@ -11,31 +11,31 @@ import { toast } from "react-toastify";
 
 export default function Login() {
   const { isSubmitting, login } = useLogin();
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
 
   const handleSubmit = async (values) => {
     login(values);
     console.log(values)
 
-    await axios.post('http://127.0.0.1:8000/api/v1/login',(values))
-    .then(res => {
-      localStorage.setItem('token',res.data.token);
-      axios.defaults.headers.common['Authorization'] = `Bearer ${res.data.token}`;
-      console.log(res.data)
-      if(res.data.success){
-        toast.success('user logedin successfull')
-        navigate(location?.state ? location?.state : "/" )
-      }
-      else{
-        console.error();
+  //   await axios.post('http://127.0.0.1:8000/api/v1/login',(values))
+  //   .then(res => {
+  //     if(res.data.success){
+  //       console.log(res.data)
+  //       localStorage.setItem('token',res.data.data.token);
+  //        axios.defaults.headers.common['Authorization'] = `Bearer ${res.data.data.token}`;
+  //       toast.success('user logedin successfull')
+  //       navigate(location?.state ? location?.state : "/" )
+  //     }
+  //     else{
+  //       console.error();
         
-      }
-    })
-    .catch( error =>{
-      console.log(error)
-      toast(error.message)
-  })
+  //     }
+  //   })
+  //   .catch( error =>{
+  //     console.log(error)
+  //     toast(error.message)
+  // })
     
   
   };
