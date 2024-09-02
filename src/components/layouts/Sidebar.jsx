@@ -123,7 +123,8 @@ const Sidebar = () => {
         ],
       },
       {
-        name: "Library",
+        name: "শান  মুবারক",
+        style: { fontFamily: "'Hind Siliguri', sans-serif", fontWeight: 700 },
         subLinks: [
           ...(user
             ? [
@@ -156,53 +157,6 @@ const Sidebar = () => {
               ]),
         ],
       },
-      // {
-      //   name: "Account",
-      //   subLinks: [
-      //     ...(user
-      //       ? [
-      //           {
-      //             id: "profile",
-      //             name: "Profile",
-      //             to: "/profile",
-      //             icon: "BiUser",
-      //             tooltip: "hover",
-      //           },
-      //           {
-      //             id: "notifications",
-      //             name: "Notifications",
-      //             to: "/notifications",
-      //             icon: "IoMdNotificationsOutline",
-      //             badgeCount: 3,
-      //             tooltip: "hover",
-      //           },
-      //           {
-      //             id: "logout",
-      //             name: "Logout",
-      //             to: "/logout",
-      //             onClick: signOut,
-      //             icon: "MdLogout",
-      //             tooltip: "hover",
-      //           },
-      //         ]
-      //       : [
-      //           {
-      //             id: "sign_up",
-      //             name: "Sign Up",
-      //             to: "/register",
-      //             icon: "BiUser",
-      //             tooltip: "hover",
-      //           },
-      //           {
-      //             id: "sign_in",
-      //             name: "Sign In",
-      //             to: "/login",
-      //             icon: "MdLogin",
-      //             tooltip: "hover",
-      //           },
-      //         ]),
-      //   ],
-      // },
     ];
   }, [user]);
 
@@ -260,7 +214,7 @@ const Sidebar = () => {
                   {((!isFolded && !isHorizontal) || toggleNav) && (
                     <span
                       className={classNames(
-                        "block p-3 mx-3 text-gray-400 text-sm uppercase"
+                        "block p-3 mx-3 text-white text-base uppercase font-bold"
                       )}
                     >
                       {item.name}

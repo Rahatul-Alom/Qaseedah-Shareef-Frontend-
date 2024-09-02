@@ -122,88 +122,88 @@ const SignUpButtons = () => {
   );
 };
 
-const notificationList = [
-  {
-    id: "1",
-    content:
-      "Mark Smith reacted to your recent added playlist - My first playlist",
-    time: "1 minute ago",
-  },
-  {
-    id: "2",
-    content: "Sarah Johnson created a new playlist - Downtown Music",
-    time: "1 day ago",
-  },
-  {
-    id: "3",
-    content: "Bob Manuel sent you a private message",
-    time: "1 week ago",
-  },
-];
+// const notificationList = [
+//   {
+//     id: "1",
+//     content:
+//       "Mark Smith reacted to your recent added playlist - My first playlist",
+//     time: "1 minute ago",
+//   },
+//   {
+//     id: "2",
+//     content: "Sarah Johnson created a new playlist - Downtown Music",
+//     time: "1 day ago",
+//   },
+//   {
+//     id: "3",
+//     content: "Bob Manuel sent you a private message",
+//     time: "1 week ago",
+//   },
+// ];
 
-const NotificationButton = () => {
-  return (
-    <div className="flex items-center h-full">
-      <DropdownMenu
-        DropdownTrigger={() => (
-          <div className="relative group">
-            <div className="absolute flex items-center justify-center w-4 h-4 rounded-full top-2 right-2 bg-primary animate-bounce group-hover:bg-white">
-              <span className="text-xs text-white group-hover:text-primary">
-                {notificationList?.length}
-              </span>
-            </div>
-            <div className="w-12 h-12 transition-colors duration-500 rounded flex_justify_center bg-primary-opacity group-hover:bg-primary">
-              <Icon
-                name="IoMdNotificationsOutline"
-                className="group-hover:!text-white"
-              />
-            </div>
-          </div>
-        )}
-        DropdownContent={() => (
-          <div className="p-2 space-y-2">
-            <div className="flex items-center gap-3 p-3 rounded bg-main">
-              <p className="text-base">All notifications</p>
-              <div className="flex items-center justify-center w-4 h-4 rounded-full bg-primary group-hover:bg-white">
-                <span className="text-xs text-white group-hover:text-primary">
-                  {3}
-                </span>
-              </div>
-            </div>
-            <ul className="list-none divide-y divide-divider">
-              {notificationList.map((item) => (
-                <li
-                  className="p-3 rounded cursor-pointer hover:bg-main"
-                  key={item.id}
-                >
-                  <Link className="flex gap-3" to="/notifications">
-                    <Icon name="IoMdNotificationsOutline" />
-                    <div className="flex flex-col flex-1 gap-1">
-                      <p className="text-sm">{item.content}</p>
-                      <span className="text-xs text-secondary">
-                        {item.time}
-                      </span>
-                    </div>
-                  </Link>
-                </li>
-              ))}
-            </ul>
+// const NotificationButton = () => {
+//   return (
+//     <div className="flex items-center h-full">
+//       <DropdownMenu
+//         DropdownTrigger={() => (
+//           <div className="relative group">
+//             <div className="absolute flex items-center justify-center w-4 h-4 rounded-full top-2 right-2 bg-primary animate-bounce group-hover:bg-white">
+//               <span className="text-xs text-white group-hover:text-primary">
+//                 {notificationList?.length}
+//               </span>
+//             </div>
+//             <div className="w-12 h-12 transition-colors duration-500 rounded flex_justify_center bg-primary-opacity group-hover:bg-primary">
+//               <Icon
+//                 name="IoMdNotificationsOutline"
+//                 className="group-hover:!text-white"
+//               />
+//             </div>
+//           </div>
+//         )}
+//         DropdownContent={() => (
+//           <div className="p-2 space-y-2">
+//             <div className="flex items-center gap-3 p-3 rounded bg-main">
+//               <p className="text-base">All notifications</p>
+//               <div className="flex items-center justify-center w-4 h-4 rounded-full bg-primary group-hover:bg-white">
+//                 <span className="text-xs text-white group-hover:text-primary">
+//                   {3}
+//                 </span>
+//               </div>
+//             </div>
+//             <ul className="list-none divide-y divide-divider">
+//               {notificationList.map((item) => (
+//                 <li
+//                   className="p-3 rounded cursor-pointer hover:bg-main"
+//                   key={item.id}
+//                 >
+//                   <Link className="flex gap-3" to="/notifications">
+//                     <Icon name="IoMdNotificationsOutline" />
+//                     <div className="flex flex-col flex-1 gap-1">
+//                       <p className="text-sm">{item.content}</p>
+//                       <span className="text-xs text-secondary">
+//                         {item.time}
+//                       </span>
+//                     </div>
+//                   </Link>
+//                 </li>
+//               ))}
+//             </ul>
 
-            <hr className="w-full border-t border-divider" />
+//             <hr className="w-full border-t border-divider" />
 
-            <Link
-              className="inline-block w-full p-3 text-sm text-center hover:text-primary"
-              to={"/notifications"}
-            >
-              See all notifications
-            </Link>
-          </div>
-        )}
-        contentClassName="w-[300px]"
-      />
-    </div>
-  );
-};
+//             <Link
+//               className="inline-block w-full p-3 text-sm text-center hover:text-primary"
+//               to={"/notifications"}
+//             >
+//               See all notifications
+//             </Link>
+//           </div>
+//         )}
+//         contentClassName="w-[300px]"
+//       />
+//     </div>
+//   );
+// };
 
 const UserMenu = () => {
   const { currentUser } = useCurrentUser();
@@ -272,12 +272,12 @@ const UserMenu = () => {
                   icon: "BiUser",
                   onClick: () => navigate("profile"),
                 },
-                {
-                  id: "notifications",
-                  name: "Notifications",
-                  icon: "IoMdNotificationsOutline",
-                  onClick: () => navigate("notifications"),
-                },
+                // {
+                //   id: "notifications",
+                //   name: "Notifications",
+                //   icon: "IoMdNotificationsOutline",
+                //   onClick: () => navigate("notifications"),
+                // },
                 {
                   id: "logout",
                   name: "Logout",
@@ -426,7 +426,7 @@ export default function Navbar() {
             <div className="flex items-center h-full gap-4 nav-icons">
               {user ? (
                 <>
-                  <NotificationButton />
+                  {/* <NotificationButton /> */}
                   <UserMenu />
                 </>
               ) : (
