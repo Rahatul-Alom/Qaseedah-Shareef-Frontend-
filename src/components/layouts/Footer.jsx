@@ -17,15 +17,14 @@ export default function Footer() {
   return (
     <div className="footer">
       <div className="py-4 border-t border-divider">
-        {/* <Title name="Go mobile" divider={false} /> */}
-        <div className="download_buttons">
-          <div className="grid grid-cols-1 gap-3 xs:grid-cols-2">
-            {downloadBtnList.map((item) => (
-              <div key={item.name} className="col-span-1">
-              </div>
-            ))}
-          </div>
-        </div>
+        <Title name="Lyrics" divider={false} />
+      <div className="mt-5">
+        <p className="my-1">পাচঁ সিতারা</p>
+        <p className="my-1"> ইলাহী হাবীবা</p>
+        <p className="my-1">শাহযাদাজী আছ ছলাতু ওয়াস সালাম</p>
+        <p className="my-1">সুন্নতী সামা হয়</p>
+
+      </div>
         <div className="footer_links">
           <div className="flex gap-2 mt-4">
           </div>
