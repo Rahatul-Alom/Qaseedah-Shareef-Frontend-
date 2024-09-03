@@ -30,7 +30,7 @@ export const useGetProfile = () => {
       getUserProfile(doc?.data());
     };
 
-    // const unsub = fbSnapshotDoc({
+    // const unsub = ({
     //   collection: "users",
     //   id: user?.uid,
     //   callback,

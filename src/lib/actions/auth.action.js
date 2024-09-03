@@ -47,6 +47,7 @@ export const useAuthState = () => {
         console.log("API response:", response.data); // Log the API response
 
         const { data } = response;
+        console.log(data)
 
         getCurrentUser({
           userId: profile && data.id,
@@ -55,7 +56,7 @@ export const useAuthState = () => {
             uid: data.id,
             name: data.name,
             email: data.email,
-            imageUrl: data.imageUrl, // Adjust based on actual response structure
+            imageUrl: data.imageUrl, 
           },
           isLoading: false,
           isLoaded: true,
@@ -83,33 +84,43 @@ export const useAuthState = () => {
 export const useLogin = () => {
   // const [notify] = useNotification();
   const navigate = useNavigate();
-  const {
-    mutate: login,
-    isPending: isSubmitting,
-    isSuccess: isSubmitted,
-  } = useMutation({
+  const { getCurrentUser, getUserProfile } = useCurrentUser(); // Get state management functions
+
+  const { mutate: login, isPending: isSubmitting, isSuccess: isSubmitted } = useMutation({
     mutationFn: async (values) => {
-        await axios.post('http://127.0.0.1:8000/api/v1/login',(values))
-        .then(res => {
-          if(res.data.success){
-            console.log(res.data)
-            localStorage.setItem('token',res.data.data.token);
-             axios.defaults.headers.common['Authorization'] = `Bearer ${res.data.data.token}`;
-            toast.success('user logedin successfull')
-            navigate(location?.state ? location?.state : "/" )
-          }
-          else{
-            console.error();
-            
-          }
-        })
-        .catch( error =>{
-          console.log(error)
-          toast(error.message)
-        });
+      try {
+        const res = await axios.post('http://127.0.0.1:8000/api/v1/login', values);
+
+        if (res.data.success) {
+          // Store the token and set axios default header
+          const token = res.data.data.token;
+          localStorage.setItem('token', token);
+          axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+
+          // Update user state
+          getCurrentUser({
+            userId: res.data.data.id,
+            user: {
+              uid: res.data.data.id,
+              name: res.data.data.name,
+              email: res.data.data.email,
+              imageUrl: res.data.data.imageUrl,
+            },
+            isLoading: false,
+            isLoaded: true,
+          });
+
+          toast.success('User logged in successfully');
+          navigate(location?.state ? location?.state : "/");
+        } else {
+          toast.error('Login failed');
+        }
+      } catch (error) {
+        console.error('Login error:', error);
+        toast.error(error.message || 'An error occurred during login');
       }
-    },
-  );
+    }
+  });
 
   return { isSubmitting, isSubmitted, login };
 };
@@ -230,42 +241,37 @@ export const useSocialAuthSignUpRedirect = () => {
 export const useLogout = () => {
   const { getCurrentUser } = useCurrentUser();
 
- const {
-    mutate: logout,
-    isPending: isSubmitting,
-    isSuccess: isSubmitted,
-  } = useMutation({
-    mutationFn: async () => {
-      try {
-        // Call the Laravel API to log out
-        const response = await axios.post('http://127.0.0.1:8000/api/v1/logout', {
+  const logout = async () => {
+    try {
+      const token = localStorage.getItem('token');
+      
+      if (token) {
+        const response = await axios.post('http://127.0.0.1:8000/api/v1/logout', {}, {
           headers: {
-            Authorization: `Bearer ${localStorage.getItem('token')}`,
+            Authorization: `Bearer ${token}`,
           },
         });
 
         if (response.data.success) {
-          // Clear user data and remove token from local storage
-          getCurrentUser({
-            isLoaded: true,
-            isLoading: false,
-          });
+          // Clear user data and remove token from localStorage
+          getCurrentUser({ isLoaded: true, isLoading: false });
           localStorage.removeItem('token');
           delete axios.defaults.headers.common['Authorization'];
+          
           console.log('Logout successful');
+          // navigate('/login'); // Redirect to login page
         } else {
-          // Handle unsuccessful logout
           console.error('Logout failed');
         }
-      } catch (err) {
-        console.error('Logout error:', );
       }
-    },
-  });
+    } catch (error) {
+      console.error('Logout error:', error.response ? error.response.data : error.message);
+    }
+  };
 
-
-  return { isSubmitting, isSubmitted, logout };
+  return { logout };
 };
+
 
 export const useForgetPassCreate = () => {
   const [notify] = useNotification();

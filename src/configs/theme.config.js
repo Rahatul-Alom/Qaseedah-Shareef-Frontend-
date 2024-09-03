@@ -111,7 +111,7 @@ export const themeConfig = {
   layouts: ["ltr", "rtl"],
   orientations: ["vertical", "horizontal"],
   players: ["lined", "boxed"],
-  fontFamilies: ["fira sans", "roboto", "lato", "inter", "poppins"],
+  fontFamilies: ["fira sans", "roboto", "lato", "inter", "poppins", "hindHind siliguri"],
   sidebars: {
     folded: "80",
     full: "200",
