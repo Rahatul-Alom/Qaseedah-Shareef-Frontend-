@@ -1,46 +1,47 @@
 import * as yup from "yup";
 
-export const registerValidation = yup
-  .object({
-    email: yup.string().email({ message: "Must be a valid email." }).required(),
-    password: yup
-      .string()
-      .min(3, { message: "Minimum 3 characters." })
-      .max(250, { message: "Maximum 250 caracters." })
-      .required(),
-    name: yup
-      .string()
-      .trim()
-      .min(3, { message: "Minimum 3 characters." })
-      .max(50, { message: "Maximum 50 caracters." })
-      .matches(/^[^@]+$/, "Input should not contain symbols.")
-      .required(),
-  })
-  .required();
+// Register Validation Schema
+export const registerValidation = yup.object({
+  email: yup
+    .string()
+    .email("Must be a valid email.") 
+    .required("Email is required."),
+  password: yup
+    .string()
+    .min(3, "Minimum 3 characters.")
+    .max(250, "Maximum 250 characters.")
+    .required("Password is required."),
+  name: yup
+    .string()
+    .trim()
+    .min(3, "Minimum 3 characters.")
+    .max(50, "Maximum 50 characters.")
+    .matches(/^[^@]+$/, "Name should not contain '@' symbol.")
+    .required("Name is required."),
+});
 
-export const loginValidation = yup
-  .object({
-    email: yup
-      .string()
-      .trim()
+// Login Validation Schema
+export const loginValidation = yup.object({
+  email: yup
+    .string()
+    .trim()
       .matches(/^(?!@)[^\s]+(?<!@)$/, "Invalid email or name")
       .required(),
 
-    password: yup
-      .string()
-      .min(3, { message: "Minimum 3 characters." })
-      .max(250, { message: "Maximum 250 caracters." })
-      .required(),
-  })
-  .required();
+  password: yup
+    .string()
+    .min(3, "Minimum 3 characters.")
+    .max(250, "Maximum 250 characters.")
+    .required("Password is required."),
+});
 
-export const forgetPassCreateValidation = yup
-  .object({
-    email: yup
-      .string()
-      .trim()
+// Forgot Password Create Validation Schema
+export const forgetPassCreateValidation = yup.object({
+  email: yup
+    .string()
+    .trim()
       .matches(/^(?!@)[^\s]+(?<!@)$/, "Invalid email or name")
-      .required(),
+      .required("Email is required."),
   })
   .required();
 
@@ -51,10 +52,9 @@ export const forgetPassResetValidation = yup
       .trim()
       .matches(/^(?!@)[^\s]+(?<!@)$/, "Invalid email or name")
       .required(),
-    password: yup
-      .string()
-      .min(3, { message: "Minimum 3 characters." })
-      .max(250, { message: "Maximum 250 caracters." })
-      .required(),
-  })
-  .required();
+  password: yup
+    .string()
+    .min(3, "Minimum 3 characters.")
+    .max(250, "Maximum 250 characters.")
+    .required("Password is required."),
+});

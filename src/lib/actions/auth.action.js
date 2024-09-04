@@ -110,7 +110,7 @@ export const useLogin = () => {
             isLoaded: true,
           });
 
-          toast.success('User logged in successfully');
+          toast.success('logged in successfully');
           navigate(location?.state ? location?.state : "/");
         } else {
           toast.error('Login failed');
@@ -154,6 +154,7 @@ export const useRegister = () => {
             prefs: {},
           },
         });
+        toast.success('User registered successfully');
       } catch (err) {
         console.error("error", err?.code);
 
@@ -181,9 +182,11 @@ export const useSocialAuthSignUp = () => {
       try {
         if (strategy === "oauth_google") {
           await signInWithRedirect(auth, googleProvider);
+          toast.success('Redirecting to Google for authentication...');
         }
         if (strategy === "oauth_github") {
           await signInWithRedirect(auth, githubProvider);
+          toast.success('Redirecting to GitHub for authentication...');
         }
       } catch (err) {
         console.error("error", err, err?.code);
@@ -257,11 +260,13 @@ export const useLogout = () => {
           getCurrentUser({ isLoaded: true, isLoading: false });
           localStorage.removeItem('token');
           delete axios.defaults.headers.common['Authorization'];
-          
+          toast.success('Logout successful');
           console.log('Logout successful');
-          // navigate('/login'); // Redirect to login page
+          navigate('/login'); // Redirect to login page
         } else {
           console.error('Logout failed');
+          toast.error('Logout failed');
+          toast.error('An error occurred during logout');
         }
       }
     } catch (error) {
