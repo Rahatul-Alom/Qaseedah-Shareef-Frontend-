@@ -117,8 +117,27 @@ export const useLogin = () => {
         }
       } catch (error) {
         console.error('Login error:', error);
-        toast.error(error.message || 'An error occurred during login');
+        if (error.response && error.response.data) {
+          const { message, data } = error.response.data;
+
+          // If wrong password
+          if (message === 'Invalid credentials') {
+            toast.error("Password is wrong");
+          } else if (data) {
+            Object.keys(data).forEach((field) => {
+              data[field].forEach((msg) => {
+                // toast.error(`${field}: ${msg}`);
+                toast.error(" Wrong Email");
+              });
+            });
+          } else {
+            toast.error(error.message || 'An error occurred during login');
+          }
+        } else {
+          toast.error(error.message || 'An error occurred during login');
+        }
       }
+      
     }
   });
 
