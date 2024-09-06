@@ -154,40 +154,89 @@ export const useRegister = () => {
   } = useMutation({
     mutationFn: async (values) => {
       try {
-        const authResp = await createUserWithEmailAndPassword(
-          auth,
-          values.email,
-          values.password
-        );
+        // Make API call to register the user
+        const res = await axios.post('http://127.0.0.1:8000/api/v1/register', values);
 
-        await updateProfile(auth.currentUser, {
-          displayName: values.name,
-        });
+        if (res.data.success) {
+          // Proceed with Firebase registration
+          const authResp = await createUserWithEmailAndPassword(
+            auth,
+            values.email,
+            values.password
+          );
 
-        await fbSetDoc({
-          collection: "users",
-          id: authResp.user?.uid,
-          data: {
-            email: authResp.user.email,
-            name: values.name,
-            prefs: {},
-          },
-        });
-        toast.success('User registered successfully');
+          await updateProfile(auth.currentUser, {
+            displayName: values.name,
+          });
+
+          await fbSetDoc({
+            collection: "users",
+            id: authResp.user?.uid,
+            data: {
+              email: authResp.user.email,
+              name: values.name,
+              prefs: {},
+            },
+          });
+
+          toast.success('User registered successfully');
+        } else {
+          // Handle validation errors returned from the API
+          if (res.data.data) {
+            const { data } = res.data;
+
+            // Check for specific error messages and show them using toast notifications
+            if (data.name && Array.isArray(data.name)) {
+              data.name.forEach((msg) => toast.error(msg));
+            }
+            if (data.email && Array.isArray(data.email)) {
+              data.email.forEach((msg) => toast.error(msg));
+            }
+            if (data.password && Array.isArray(data.password)) {
+              data.password.forEach((msg) => toast.error(msg));
+            }
+            if (data.password_confirmation && Array.isArray(data.password_confirmation)) {
+              data.password_confirmation.forEach((msg) => toast.error(msg));
+            }
+          } else {
+            toast.error(res.data.message || 'An error occurred during registration');
+          }
+        }
       } catch (err) {
         console.error("error", err?.code);
 
-        notify({
-          title: "Error",
-          variant: "error",
-          description: err?.code || JSON.stringify(err),
-        });
+        // Check if there is a specific error response from the API
+        if (err.response && err.response.data) {
+          const { message, data } = err.response.data;
+
+          // Show validation errors if available
+          if (data) {
+            if (data.name && Array.isArray(data.name)) {
+              data.name.forEach((msg) => toast.error(msg));
+            }
+            if (data.email && Array.isArray(data.email)) {
+              data.email.forEach((msg) => toast.error(msg));
+            }
+            if (data.password && Array.isArray(data.password)) {
+              data.password.forEach((msg) => toast.error(msg));
+            }
+            if (data.password_confirmation && Array.isArray(data.password_confirmation)) {
+              data.password_confirmation.forEach((msg) => toast.error(msg));
+            }
+          } else {
+            toast.error(message || 'An error occurred during registration');
+          }
+        } else {
+          // Show generic error message
+          toast.error(err.message || 'An error occurred during registration');
+        }
       }
     },
   });
 
   return { isSubmitting, isSubmitted, register };
 };
+
 
 export const useSocialAuthSignUp = () => {
   const [notify] = useNotification();
