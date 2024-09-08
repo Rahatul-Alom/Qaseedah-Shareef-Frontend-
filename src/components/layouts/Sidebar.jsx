@@ -15,7 +15,7 @@ const User = () => {
   const { currentUser } = useCurrentUser();
 
   const { user } = currentUser || {};
-  const { email, username, imageUrl } = user || {};
+  const { email, name, imageUrl } = user || {};
 
   return (
     <Link
@@ -32,7 +32,7 @@ const User = () => {
 
       {email && (
         <div className="flex flex-col flex-1 text-sm">
-          <span className="">@{username}</span>
+          <span className="">@{name}</span>
           <span className="break-all text-secondary">{email}</span>
         </div>
       )}
@@ -126,9 +126,9 @@ const Sidebar = () => {
         name: "Menu",
         subLinks: [
           {
-            id: "discover",
-            name: "Discover",
-            to: "/discover",
+            id: "home",
+            name: "Home",
+            to: "/home",
             icon: "BiPlayCircle",
             tooltip: "hover",
           },
@@ -161,7 +161,7 @@ const Sidebar = () => {
         })),
       },
     ];
-  }, [user]);
+  }, [dedications]);
 
   const hideTooltip = (hideFunc) => {
     setToggleNav(false);
@@ -217,7 +217,7 @@ const Sidebar = () => {
                   {((!isFolded && !isHorizontal) || toggleNav) && (
                     <span
                       className={classNames(
-                        "block p-3 mx-3 text-gray-400 text-sm uppercase"
+                        "block p-3 mx-3 text-white text-base uppercase font-bold"
                       )}
                     >
                       {item.name}
