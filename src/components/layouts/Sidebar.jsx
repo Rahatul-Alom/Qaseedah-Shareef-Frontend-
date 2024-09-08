@@ -93,6 +93,33 @@ const Sidebar = () => {
     getToggleMenu && getToggleMenu(false);
   }, [pathname]);
 
+  const [dedications, setDedications] = useState([]);
+
+  useEffect(() => {
+    const fetchDedications = async () => {
+      try {
+        const response = await fetch("http://127.0.0.1:8000/api/v1/dedications");
+
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+
+        const contentType = response.headers.get("content-type");
+        if (!contentType || !contentType.includes("application/json")) {
+          throw new TypeError("Oops, we haven't got JSON!");
+        }
+
+        const data = await response.json();
+        console.log("Dedications:", data);
+        setDedications(data.data);
+      } catch (error) {
+        console.error("Error fetching dedications:", error);
+      }
+    };
+
+    fetchDedications();
+  }, []);
+
   const navlinks = useMemo(() => {
     return [
       {
@@ -125,37 +152,13 @@ const Sidebar = () => {
       {
         name: "শান  মুবারক",
         style: { fontFamily: "'Hind Siliguri', sans-serif", fontWeight: 700 },
-        subLinks: [
-          ...(user
-            ? [
-                {
-                  id: "favourite_playlists",
-                  name: "Favourite Playlists",
-                  to: "/favourite-playlists",
-                  icon: "GiLoveSong",
-                  tooltip: "hover",
-                },
-                {
-                  id: "my_playlists",
-                  name: "My Playlists",
-                  to: "/my-playlist",
-                  icon: "PiPlaylistBold",
-                  tooltip: "hover",
-                },
-              ]
-            : [
-                {
-                  id: "create_playlists",
-                  name: "Create Playlists",
-                  icon: "PiPlaylistBold",
-                  dialog: true,
-                  tooltip: "click",
-                  tooltipContent: CreatePlaylistTooltipContent,
-                  arrowPos: "left-top",
-                  arrowClassName: "text-card",
-                },
-              ]),
-        ],
+        subLinks: dedications.map((dedication) => ({
+          id: dedication.id,
+          name: dedication.name,
+          to: `/dedication/${dedication.id}`,
+          icon: "FaRegUser",
+          tooltip: "hover",
+        })),
       },
     ];
   }, [user]);
@@ -172,10 +175,10 @@ const Sidebar = () => {
       className={classNames(
         "sidebar_section z-[1100] fixed top-0",
         isMobile &&
-          classNames(
-            "transition-all duration-500",
-            toggleMenu && !isHorizontal ? "left-0" : "-left-sidebar"
-          ),
+        classNames(
+          "transition-all duration-500",
+          toggleMenu && !isHorizontal ? "left-0" : "-left-sidebar"
+        ),
 
         isHorizontal
           ? "top-navbar sidebar_horizontal_width bg-sidebar-0 shadow-dialog"
@@ -259,7 +262,7 @@ const Sidebar = () => {
                                 "flex flex-row items-center gap-2 h-12 w-full outline-0 border-none",
                                 isHorizontal ? "items-center p-3" : "pl-[20px]",
                                 pathname.includes(link.to) &&
-                                  "rounded bg-primary-opacity"
+                                "rounded bg-primary-opacity"
                               )}
                             >
                               <Icon
