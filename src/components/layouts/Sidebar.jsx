@@ -110,7 +110,7 @@ const Sidebar = () => {
         }
 
         const data = await response.json();
-        console.log("Dedications:", data);
+        console.log("Dedications:", data.data);
         setDedications(data.data);
       } catch (error) {
         console.error("Error fetching dedications:", error);
@@ -156,7 +156,7 @@ const Sidebar = () => {
           id: dedication.id,
           name: dedication.name,
           to: `/dedication/${dedication.id}`,
-          icon: "FaRegUser",
+          icon: "RiListIndefinite",
           tooltip: "hover",
         })),
       },
