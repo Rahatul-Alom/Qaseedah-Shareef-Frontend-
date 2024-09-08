@@ -1,8 +1,8 @@
 export {
   googleProvider,
   githubProvider,
-  db,
-  storage,
+  // db,
+  // storage,
   auth
 } from "./firebase.config";
 // export {auth} from "./auth.config";

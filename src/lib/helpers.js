@@ -22,14 +22,22 @@ import {
   uploadBytes,
 } from "@firebase/storage";
 
-import { db, storage } from "@/configs";
+// import { db, storage } from "@/configs";
 
-// const DEEZER_API_URL = import.meta.env.VITE_PUBLIC_DEEZER_API_URL;
-// const CORS_URL = import.meta.env.VITE_PUBLIC_CORS_URL;
 
+const DEEZER_API_URL = import.meta.env.VITE_PUBLIC_DEEZER_API_URL;
+const CORS_URL = import.meta.env.VITE_PUBLIC_CORS_URL;
+
+/**
+ * Uploads an image to the specified storage path, compressing it first.
+ * @param {File} imageFile the image file to upload
+ * @param {string} storagePath the path in the storage bucket to upload the image to
+ * @param {string} [fileName] the name of the file to upload; if not provided, the original file name is used
+ * @returns {Promise<string>} the download URL of the uploaded image
+ */
 export const uploadImage = async ({ imageFile, storagePath, fileName }) => {
   const compressImgOption = {
-    maxSizeMB: 0.05,
+    maxSizeMB: 2.0,
     maxWidthOrHeight: 1000,
     useWebWorker: true,
   };

@@ -16,6 +16,12 @@ const downloadBtnList = [
 export default function Footer() {
   return (
     <div className="footer">
+      <div>
+        <h1>Now playing from নূর সিতারা</h1>
+        <div className="box-border bg-white mt-4 h-32 w-60 rounded-md"></div>
+        <p className="mt-2">Shahzadaji As Solatu Assalam</p>
+        <p className="text-[#636D78]">Mabrurul Haque</p>
+      </div>
       <div className="py-4 border-t border-divider">
         <Title name="Lyrics" divider={false} />
       <div className="mt-5">

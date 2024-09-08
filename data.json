@@ -1,0 +1,44 @@
+[
+    {
+      "id": 5578942,
+      "name": "Doja Cat",
+      "link": "https://www.deezer.com/artist/5578942",
+      "picture": "https://api.deezer.com/artist/5578942/image",
+      "picture_small": "https://e-cdns-images.dzcdn.net/images/artist/590069eb9480dc9c2163ae1c611c4d0c/56x56-000000-80-0-0.jpg",
+      "picture_medium": "https://e-cdns-images.dzcdn.net/images/artist/590069eb9480dc9c2163ae1c611c4d0c/250x250-000000-80-0-0.jpg",
+      "picture_big": "https://e-cdns-images.dzcdn.net/images/artist/590069eb9480dc9c2163ae1c611c4d0c/500x500-000000-80-0-0.jpg",
+      "picture_xl": "https://e-cdns-images.dzcdn.net/images/artist/590069eb9480dc9c2163ae1c611c4d0c/1000x1000-000000-80-0-0.jpg",
+      "radio": true,
+      "tracklist": "https://api.deezer.com/artist/5578942/top?limit=50",
+      "position": 3,
+      "type": "artist"
+    },
+    {
+      "id": 120777182,
+      "name": "Titta Salamandrini",
+      "link": "https://www.deezer.com/artist/120777182",
+      "picture": "https://api.deezer.com/artist/120777182/image",
+      "picture_small": "https://e-cdns-images.dzcdn.net/images/artist/56cf4505e8af01d7765419187986f262/56x56-000000-80-0-0.jpg",
+      "picture_medium": "https://e-cdns-images.dzcdn.net/images/artist/56cf4505e8af01d7765419187986f262/250x250-000000-80-0-0.jpg",
+      "picture_big": "https://e-cdns-images.dzcdn.net/images/artist/56cf4505e8af01d7765419187986f262/500x500-000000-80-0-0.jpg",
+      "picture_xl": "https://e-cdns-images.dzcdn.net/images/artist/56cf4505e8af01d7765419187986f262/1000x1000-000000-80-0-0.jpg",
+      "radio": true,
+      "tracklist": "https://api.deezer.com/artist/120777182/top?limit=50",
+      "position": 4,
+      "type": "artist"
+    },
+    {
+      "id": 120612282,
+      "name": "Giulietta Sacropuntis",
+      "link": "https://www.deezer.com/artist/120612282",
+      "picture": "https://api.deezer.com/artist/120612282/image",
+      "picture_small": "https://e-cdns-images.dzcdn.net/images/artist/03808accfc1cfc5af5463d950d0bc788/56x56-000000-80-0-0.jpg",
+      "picture_medium": "https://e-cdns-images.dzcdn.net/images/artist/03808accfc1cfc5af5463d950d0bc788/250x250-000000-80-0-0.jpg",
+      "picture_big": "https://e-cdns-images.dzcdn.net/images/artist/03808accfc1cfc5af5463d950d0bc788/500x500-000000-80-0-0.jpg",
+      "picture_xl": "https://e-cdns-images.dzcdn.net/images/artist/03808accfc1cfc5af5463d950d0bc788/1000x1000-000000-80-0-0.jpg",
+      "radio": true,
+      "tracklist": "https://api.deezer.com/artist/120612282/top?limit=50",
+      "position": 5,
+      "type": "artist"
+    }
+  ]

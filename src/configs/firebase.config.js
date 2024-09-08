@@ -4,8 +4,8 @@ import {
   GoogleAuthProvider,
   GithubAuthProvider,
 } from "@firebase/auth";
-import { getFirestore } from "@firebase/firestore";
-import { getStorage } from "@firebase/storage";
+// import { getFirestore } from "@firebase/firestore";
+// import { getStorage } from "@firebase/storage";
 
 const firebaseConfig = {
   apiKey: import.meta.env.VITE_PUBLIC_FIREBASE_API_KEY,
@@ -20,5 +20,5 @@ export const auth = getAuth(app);
 export const googleProvider = new GoogleAuthProvider();
 export const githubProvider = new GithubAuthProvider();
 
-export const db = getFirestore(app);
-export const storage = getStorage(app);
+// export const db = getFirestore(app);
+// export const storage = getStorage(app);

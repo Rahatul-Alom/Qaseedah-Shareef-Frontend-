@@ -15,7 +15,7 @@ const User = () => {
   const { currentUser } = useCurrentUser();
 
   const { user } = currentUser || {};
-  const { email, name, imageUrl } = user || {};
+  const { email, username, imageUrl } = user || {};
 
   return (
     <Link
@@ -32,7 +32,7 @@ const User = () => {
 
       {email && (
         <div className="flex flex-col flex-1 text-sm">
-          <span className="">@{name}</span>
+          <span className="">@{username}</span>
           <span className="break-all text-secondary">{email}</span>
         </div>
       )}
@@ -126,9 +126,9 @@ const Sidebar = () => {
         name: "Menu",
         subLinks: [
           {
-            id: "home",
-            name: "Home",
-            to: "/home",
+            id: "discover",
+            name: "Discover",
+            to: "/discover",
             icon: "BiPlayCircle",
             tooltip: "hover",
           },
@@ -152,13 +152,84 @@ const Sidebar = () => {
       {
         name: "শান  মুবারক",
         style: { fontFamily: "'Hind Siliguri', sans-serif", fontWeight: 700 },
-        subLinks: dedications.map((dedication) => ({
-          id: dedication.id,
-          name: dedication.name,
-          to: `/dedication/${dedication.id}`,
-          icon: "FaRegUser",
-          tooltip: "hover",
-        })),
+        subLinks: [
+          ...(user
+            ? [
+                {
+                  id: "favourite_playlists",
+                  name: "Favourite Playlists",
+                  to: "/favourite-playlists",
+                  icon: "GiLoveSong",
+                  tooltip: "hover",
+                },
+                {
+                  id: "my_playlists",
+                  name: "My Playlists",
+                  to: "/my-playlist",
+                  icon: "PiPlaylistBold",
+                  tooltip: "hover",
+                },
+              ]
+            : [
+                {
+                  id: "create_playlists",
+                  name: "Create Playlists",
+                  icon: "PiPlaylistBold",
+                  dialog: true,
+                  tooltip: "click",
+                  tooltipContent: CreatePlaylistTooltipContent,
+                  arrowPos: "left-top",
+                  arrowClassName: "text-card",
+                },
+              ]),
+        ],
+      },
+      {
+        name: "Account",
+        subLinks: [
+          ...(user
+            ? [
+                {
+                  id: "profile",
+                  name: "Profile",
+                  to: "/profile",
+                  icon: "BiUser",
+                  tooltip: "hover",
+                },
+                {
+                  id: "notifications",
+                  name: "Notifications",
+                  to: "/notifications",
+                  icon: "IoMdNotificationsOutline",
+                  badgeCount: 3,
+                  tooltip: "hover",
+                },
+                {
+                  id: "logout",
+                  name: "Logout",
+                  to: "/logout",
+                  onClick: signOut,
+                  icon: "MdLogout",
+                  tooltip: "hover",
+                },
+              ]
+            : [
+                {
+                  id: "sign_up",
+                  name: "Sign Up",
+                  to: "/register",
+                  icon: "BiUser",
+                  tooltip: "hover",
+                },
+                {
+                  id: "sign_in",
+                  name: "Sign In",
+                  to: "/login",
+                  icon: "MdLogin",
+                  tooltip: "hover",
+                },
+              ]),
+        ],
       },
     ];
   }, [user]);
@@ -217,7 +288,7 @@ const Sidebar = () => {
                   {((!isFolded && !isHorizontal) || toggleNav) && (
                     <span
                       className={classNames(
-                        "block p-3 mx-3 text-white text-base uppercase font-bold"
+                        "block p-3 mx-3 text-gray-400 text-sm uppercase"
                       )}
                     >
                       {item.name}
