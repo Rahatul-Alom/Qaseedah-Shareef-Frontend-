@@ -32,7 +32,7 @@ export default function ThemeProvider({ children }) {
   return (
     <div className="app_container">
       {children}
-      {theme && <ThemeSwitcher />}
+      {/* {theme && <ThemeSwitcher />} */}
     </div>
   );
 }
