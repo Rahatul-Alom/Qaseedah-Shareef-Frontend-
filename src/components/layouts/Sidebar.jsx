@@ -110,7 +110,7 @@ const Sidebar = () => {
         }
 
         const data = await response.json();
-        console.log("Dedications:", data);
+        console.log("Dedications:", data.data);
         setDedications(data.data);
       } catch (error) {
         console.error("Error fetching dedications:", error);
@@ -152,84 +152,13 @@ const Sidebar = () => {
       {
         name: "শান  মুবারক",
         style: { fontFamily: "'Hind Siliguri', sans-serif", fontWeight: 700 },
-        subLinks: [
-          ...(user
-            ? [
-                {
-                  id: "favourite_playlists",
-                  name: "Favourite Playlists",
-                  to: "/favourite-playlists",
-                  icon: "GiLoveSong",
-                  tooltip: "hover",
-                },
-                {
-                  id: "my_playlists",
-                  name: "My Playlists",
-                  to: "/my-playlist",
-                  icon: "PiPlaylistBold",
-                  tooltip: "hover",
-                },
-              ]
-            : [
-                {
-                  id: "create_playlists",
-                  name: "Create Playlists",
-                  icon: "PiPlaylistBold",
-                  dialog: true,
-                  tooltip: "click",
-                  tooltipContent: CreatePlaylistTooltipContent,
-                  arrowPos: "left-top",
-                  arrowClassName: "text-card",
-                },
-              ]),
-        ],
-      },
-      {
-        name: "Account",
-        subLinks: [
-          ...(user
-            ? [
-                {
-                  id: "profile",
-                  name: "Profile",
-                  to: "/profile",
-                  icon: "BiUser",
-                  tooltip: "hover",
-                },
-                {
-                  id: "notifications",
-                  name: "Notifications",
-                  to: "/notifications",
-                  icon: "IoMdNotificationsOutline",
-                  badgeCount: 3,
-                  tooltip: "hover",
-                },
-                {
-                  id: "logout",
-                  name: "Logout",
-                  to: "/logout",
-                  onClick: signOut,
-                  icon: "MdLogout",
-                  tooltip: "hover",
-                },
-              ]
-            : [
-                {
-                  id: "sign_up",
-                  name: "Sign Up",
-                  to: "/register",
-                  icon: "BiUser",
-                  tooltip: "hover",
-                },
-                {
-                  id: "sign_in",
-                  name: "Sign In",
-                  to: "/login",
-                  icon: "MdLogin",
-                  tooltip: "hover",
-                },
-              ]),
-        ],
+        subLinks: dedications.map((dedication) => ({
+          id: dedication.id,
+          name: dedication.name,
+          to: `/dedication/${dedication.id}`,
+          icon: "RiListIndefinite",
+          tooltip: "hover",
+        })),
       },
     ];
   }, [user]);
