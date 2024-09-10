@@ -12,7 +12,7 @@ import {
 import { useCurrentUser } from "@/lib/store";
 import { fbUpdateDoc, uploadImage, } from "@/lib/helpers";
 import { useNotification } from "@/hooks";
-import { auth } from "@/configs";
+// import { auth } from "@/configs";
 
 export const useGetProfile = () => {
   const [, setThemeLS] = useLocalStorage("groove-theme-config");

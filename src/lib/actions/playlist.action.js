@@ -20,13 +20,13 @@ import {
 } from "@/lib/helpers";
 
 import { useNotification } from "@/hooks";
-import { auth } from "@/configs";
+// import { auth } from "@/configs";
 
 import { fetchMultiplePlaylists } from "./editorial.action";
 
 // recent played
 export const useSaveRecentPlayed = () => {
-  const userId = auth?.currentUser?.uid;
+  // const userId = auth?.currentUser?.uid;
 
   const queryClient = useQueryClient();
 

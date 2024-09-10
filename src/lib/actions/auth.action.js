@@ -18,7 +18,7 @@ import {
 import { useCurrentUser } from "@/lib/store";
 import { fbSetDoc } from "@/lib/helpers";
 import { useNotification } from "@/hooks";
-import { auth, googleProvider, githubProvider } from "@/configs";
+import { googleProvider, githubProvider } from "@/configs";
 import axios from "axios";
 import { toast } from "react-toastify";
 

@@ -7,13 +7,13 @@ export const useFetchTopCharts = (params) => {
   const { isPending, isSuccess, isError, isFetching, error, data } = useQuery({
     queryKey: ["topCharts", params],
     queryFn: async () => {
-      const { id, section } = params ?? {};
+      const { tracks, section } = params ?? {};
 
-      if (!(id && section)) {
+      if (!(tracks && section)) {
         throw new Error("Invalid params");
       }
       const data = await apiQuery({
-        endpoint: `editorial/${id}/${section}`,
+        endpoint: `tracks`,
       });
 
       let resp;
@@ -30,14 +30,14 @@ export const useFetchTopCharts = (params) => {
   return { isPending, isSuccess, isError, isFetching, error, data };
 };
 
-export const useFetchNewReleases = ({ id }) => {
+export const useFetchNewReleases = ({ tracks }) => {
   const { isPending, isSuccess, isError, isFetching, error, data } = useQuery({
-    queryKey: [`newReleases_${id}`, { id }],
+    queryKey: [`newReleases_${tracks}`, { tracks }],
     queryFn: async () => {
       try {
-        if (id) {
+        if (tracks) {
           const data = await apiQuery({
-            endpoint: `editorial/${id}/releases`,
+            endpoint: `${tracks}`,
           });
 
           return { ["releases"]: data };
@@ -54,14 +54,14 @@ export const useFetchNewReleases = ({ id }) => {
   return { isPending, isSuccess, isError, isFetching, error, data };
 };
 
-export const useFetchTopSelection = ({ id }) => {
+export const useFetchTopSelection = ({ tracks }) => {
   const { isPending, isSuccess, isError, isFetching, error, data } = useQuery({
-    queryKey: [`topSelection_${id}`, { id }],
+    queryKey: [`topSelection_${tracks}`, { tracks }],
     queryFn: async () => {
       try {
-        if (id) {
+        if (tracks) {
           const data = await apiQuery({
-            endpoint: `editorial/${id}/selection`,
+            endpoint: `${tracks}`,
           });
 
           return { ["selection"]: data };
@@ -95,14 +95,14 @@ export const useFetchGenres = () => {
   return { isPending, isSuccess, isError, isFetching, error, data };
 };
 
-export const useFetchGenreById = ({ id }) => {
+export const useFetchGenreById = ({ tracks }) => {
   const { isPending, isSuccess, isError, isFetching, error, data } = useQuery({
-    queryKey: [`genreById_${id}`, { id }],
+    queryKey: [`genreBytracks_${tracks}`, { tracks }],
     queryFn: async () => {
       try {
-        if (id) {
+        if (tracks) {
           const response = await apiQuery({
-            endpoint: `genre/${id}`,
+            endpoint: `genre/${tracks}`,
           });
           return response;
         } else {
@@ -117,14 +117,14 @@ export const useFetchGenreById = ({ id }) => {
   return { isPending, isSuccess, isError, isFetching, error, data };
 };
 
-export const useFetchGenreBySection = ({ id, section }) => {
+export const useFetchGenreBySection = ({ tracks, section }) => {
   const { isPending, isSuccess, isError, isFetching, error, data } = useQuery({
-    queryKey: [`genreBySection_${section}_${id}`, { id, section }],
+    queryKey: [`genreBySection_${section}_${tracks}`, { tracks, section }],
     queryFn: async () => {
       try {
-        if (id && section) {
+        if (tracks && section) {
           const response = await apiQuery({
-            endpoint: `genre/${id}/${section}`,
+            endpoint: `tracks`,
           });
 
           return response;
@@ -140,12 +140,12 @@ export const useFetchGenreBySection = ({ id, section }) => {
   return { isPending, isSuccess, isError, isFetching, error, data };
 };
 
-export const useFetchArtist = ({ id }) => {
+export const useFetchArtist = ({ tracks }) => {
   const { isPending, isSuccess, isError, isFetching, error, data } = useQuery({
-    queryKey: [`artist_${id}`, { id }],
+    queryKey: [`artist_${tracks}`, { tracks }],
     queryFn: async () => {
       try {
-        if (id) {
+        if (tracks) {
           const limit = "?limit=20";
 
           const [
@@ -156,7 +156,7 @@ export const useFetchArtist = ({ id }) => {
             playlists,
             radios,
           ] = await Promise.all([
-            apiQuery({ endpoint: `artist/${id}` }),
+            apiQuery({ endpoint: `stracks` }),
             apiQuery({ endpoint: `artist/${id}/top${limit}` }),
             apiQuery({ endpoint: `artist/${id}/albums${limit}` }),
             apiQuery({ endpoint: `artist/${id}/related${limit}` }),
@@ -191,7 +191,7 @@ export const useFetchChartBySection = ({ id, section }) => {
       try {
         if (id && section) {
           const response = await apiQuery({
-            endpoint: `chart/${id}/${section}`,
+            endpoint: `tracks`,
           });
 
           return response;
@@ -207,14 +207,14 @@ export const useFetchChartBySection = ({ id, section }) => {
   return { isPending, isSuccess, isError, isFetching, error, data };
 };
 
-export const useFetchPlaylists = ({ id, section }) => {
+export const useFetchPlaylists = ({ tracks, section }) => {
   const { isPending, isSuccess, isError, isFetching, error, data } = useQuery({
-    queryKey: [`playlist_${section}_${id}`, { id, section }],
+    queryKey: [`playlist_${section}_${tracks}`, { tracks, section }],
     queryFn: async () => {
       try {
-        if (id && section) {
+        if (tracks && section) {
           const response = await apiQuery({
-            endpoint: `${section}/${id}`,
+            endpoint: `${section}/${tracks}`,
           });
 
           return response;
@@ -265,7 +265,7 @@ export const useFetchTracks = () => {
           setGetId(id);
 
           const response = await apiQuery({
-            endpoint: `${type}/${id}/tracks`,
+            endpoint: `${id}/tracks`,
           });
 
           if (callback) callback(response.data);

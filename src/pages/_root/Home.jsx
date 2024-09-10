@@ -25,7 +25,7 @@ export default function Home() {
     id: "0",
   });
 
-  const { playlists, artists, albums, podcasts } = topChartData || {};
+  const {  artists, albums, podcasts,tracks } = topChartData || {};
   const { releases } = newReleases || {};
 
   return (
@@ -50,7 +50,7 @@ export default function Home() {
         ) : null}
 
         <Sections.MediaSection
-          data={playlists?.data}
+          data={tracks?.data}
           title="home"
           subTitle="Explore sonic realms with our home feature."
           type="playlist"

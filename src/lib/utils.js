@@ -118,7 +118,7 @@ export const getFormatData = (arr, image_alt) => {
           id: item?.id,
           image:
             item?.picture_big ||
-            item?.cover_big ||
+            item?.image ||
             item?.album?.cover_big ||
             image_alt,
           name: item?.title || item?.name,

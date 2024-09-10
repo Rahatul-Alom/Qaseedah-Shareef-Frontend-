@@ -26,7 +26,7 @@ import {
 
 
 const DEEZER_API_URL = import.meta.env.VITE_PUBLIC_DEEZER_API_URL;
-const CORS_URL = import.meta.env.VITE_PUBLIC_CORS_URL;
+// const CORS_URL = import.meta.env.VITE_PUBLIC_CORS_URL;
 
 /**
  * Uploads an image to the specified storage path, compressing it first.
@@ -110,18 +110,19 @@ export const fbCountCollection = async ({ collection, whereQueries }) => {
 };
 
 const getBaseUrl = (endpoint) => {
-  return `${CORS_URL}/${DEEZER_API_URL}/${endpoint}`;
+  return `${DEEZER_API_URL}/${endpoint}`;
 };
 
-export const apiQuery = async ({ endpoint, config, method = "GET" }) => {
+export const apiQuery = async ({ endpoint,method = "GET" }) => {
   try {
     const options = {
       url: getBaseUrl(endpoint),
       method,
-      ...config,
+      // ...config,
     };
 
     const response = await axios(options);
+    console.log(response.data);
 
     return response.data;
   } catch (error) {

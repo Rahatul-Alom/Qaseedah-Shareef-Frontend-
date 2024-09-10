@@ -18,7 +18,7 @@ export default function MediaCard({ item, type }) {
   const { handlePlayPause, handleGetPlaylist, isPlaying } = usePlayer();
 
   const isTypeTopClick = useMemo(
-    () => ["genre", "podcast", "artist"].includes(type),
+    () => ["genre", "podcast", "artist", "tracks"].includes(type),
     [type]
   );
 
