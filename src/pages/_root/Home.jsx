@@ -15,7 +15,7 @@ export default function Home() {
     data: topChartData,
     isPending: isTopChartDataPending,
     isSuccess: isTopChartDataSuccess,
-  } = useFetchTopCharts({ id: "0", section: "charts" });
+  } = useFetchTopCharts();
 
   const {
     data: newReleases,
@@ -25,7 +25,9 @@ export default function Home() {
     id: "0",
   });
 
-  const {  artists, albums, podcasts,tracks } = topChartData || {};
+  const { artists, tracks } = topChartData || {};
+  console.log(artists, tracks);
+
   const { releases } = newReleases || {};
 
   return (
@@ -71,7 +73,7 @@ export default function Home() {
           isSuccess={isTopChartDataSuccess}
         />
 
-        <Sections.MediaSection
+        {/* <Sections.MediaSection
           data={albums?.data}
           title="Editor's Picks"
           subTitle="Curation of standout tracks."
@@ -79,7 +81,7 @@ export default function Home() {
           type="album"
           isLoading={isTopChartDataPending}
           isSuccess={isTopChartDataSuccess}
-        />
+        /> */}
 
         <Sections.MediaSection
           data={releases?.data}
@@ -91,7 +93,7 @@ export default function Home() {
           isSuccess={isNewReleaseDataSuccess}
         />
 
-        <Sections.MediaSection
+        {/* <Sections.MediaSection
           data={podcasts?.data}
           title="Podcasts For You"
           subTitle="Listen and enjoy personalized audio content just for you."
@@ -99,7 +101,7 @@ export default function Home() {
           type="podcast"
           isLoading={isTopChartDataPending}
           isSuccess={isTopChartDataSuccess}
-        />
+        /> */}
       </div>
     </section>
   );

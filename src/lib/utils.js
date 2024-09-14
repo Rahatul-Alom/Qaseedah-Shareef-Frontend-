@@ -118,7 +118,7 @@ export const getFormatData = (arr, image_alt) => {
           id: item?.id,
           image:
             item?.picture_big ||
-            item?.image ||
+            item?.cover_image ||
             item?.album?.cover_big ||
             image_alt,
           name: item?.title || item?.name,
@@ -139,7 +139,7 @@ export const getFormatData = (arr, image_alt) => {
           tracksNo: item?.track_total || item?.nb_tracks,
           albumsNo: item?.nb_album || item?.details?.nb_album,
           fansNo: item?.nb_fan || item?.fans || item?.details?.nb_fan,
-          audioSrc: item?.preview,
+          audioSrc: item?.audio_file,
           tracks: item?.tracks,
           details: item?.details,
         };

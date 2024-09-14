@@ -45,16 +45,16 @@ export default function MediaCard({ item, type }) {
             type === "artist" ? "rounded-full" : "rounded"
           )}
         >
-          {item.image ? (
+          {item.cover_image ? (
             <img
-              src={item.image}
+              src={item.cover_image}
               className={classNames(
                 "object-cover aspect-square w-full",
                 type === "artist" ? "rounded-full" : "rounded"
               )}
               width={100}
               height={100}
-              alt="image"
+              alt="cover_cover_image"
             />
           ) : (
             <div
@@ -99,11 +99,11 @@ export default function MediaCard({ item, type }) {
                     e.stopPropagation();
                     const callback = (tracks) => {
                       handleGetPlaylist({
-                        tracklist: getFormatData(tracks, item?.image),
+                        tracklist: getFormatData(tracks, item?.cover_cover_image),
                         playlistId: item?.id,
                         playlistType: item?.type,
                         savePlay: true,
-                        imageAlt: item?.image,
+                        cover_imageAlt: item?.cover_image,
                       });
                     };
                     fetchTracks(

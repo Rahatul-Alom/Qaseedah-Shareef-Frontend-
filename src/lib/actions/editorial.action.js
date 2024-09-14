@@ -5,11 +5,13 @@ import { apiQuery } from "@/lib/helpers";
 
 export const useFetchTopCharts = (params) => {
   const { isPending, isSuccess, isError, isFetching, error, data } = useQuery({
-    queryKey: ["topCharts", params],
-    queryFn: async () => {
-      const { tracks, section } = params ?? {};
+    queryKey: ["tracks", params],
 
-      if (!(tracks && section)) {
+    queryFn: async () => {
+      const { tracks } = params ?? {};
+      console.log("Fetching top charts with params:", params);
+
+      if (!(tracks)) {
         throw new Error("Invalid params");
       }
       const data = await apiQuery({
@@ -17,10 +19,10 @@ export const useFetchTopCharts = (params) => {
       });
 
       let resp;
-      if (["charts"].includes(section)) {
+      if (["tracks"].includes(tracks)) {
         resp = data;
       } else {
-        resp = { [section]: data };
+        resp = {[tracks]: data };
       }
 
       return resp;
@@ -140,12 +142,12 @@ export const useFetchGenreBySection = ({ tracks, section }) => {
   return { isPending, isSuccess, isError, isFetching, error, data };
 };
 
-export const useFetchArtist = ({ tracks }) => {
+export const useFetchArtist = ({ id }) => {
   const { isPending, isSuccess, isError, isFetching, error, data } = useQuery({
-    queryKey: [`artist_${tracks}`, { tracks }],
+    queryKey: [`artist_${id}`, { id }],
     queryFn: async () => {
       try {
-        if (tracks) {
+        if (id) {
           const limit = "?limit=20";
 
           const [
@@ -156,7 +158,7 @@ export const useFetchArtist = ({ tracks }) => {
             playlists,
             radios,
           ] = await Promise.all([
-            apiQuery({ endpoint: `stracks` }),
+            apiQuery({ endpoint: `artist/${id}` }),
             apiQuery({ endpoint: `artist/${id}/top${limit}` }),
             apiQuery({ endpoint: `artist/${id}/albums${limit}` }),
             apiQuery({ endpoint: `artist/${id}/related${limit}` }),
@@ -176,7 +178,7 @@ export const useFetchArtist = ({ tracks }) => {
           return null;
         }
       } catch (error) {
-        // console.log(error);
+        console.log(error);
       }
     },
   });
@@ -270,7 +272,7 @@ export const useFetchTracks = () => {
 
           if (callback) callback(response.data);
         } catch (error) {
-          // console.log(error);
+          console.log(error);
         } finally {
           setGetId(null);
         }
