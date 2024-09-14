@@ -154,8 +154,8 @@ const Sidebar = () => {
         style: { fontFamily: "'Hind Siliguri', sans-serif", fontWeight: 700 },
         subLinks: dedications.map((dedication) => ({
           id: dedication.id,
-          name: dedication.name,
-          to: `/dedication/${dedication.id}`,
+          name: dedication.name.slice(0, 15) + (dedication.name.length > 15  ? '...' : ''),
+          to: `/browse?dedication_id=${dedication.id}`,
           icon: "RiListIndefinite",
           tooltip: "hover",
         })),
