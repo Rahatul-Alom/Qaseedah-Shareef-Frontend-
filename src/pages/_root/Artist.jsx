@@ -40,13 +40,13 @@ export default function Artist() {
         isSuccess={artistDataSuccess}
       />
     ),
-    related_artists: (
-      <TabContents.RelatedArtists
-        relatedArtists={relatedArtists}
-        isPending={artistDataPending}
-        isSuccess={artistDataSuccess}
-      />
-    ),
+    // related_artists: (
+    //   <TabContents.RelatedArtists
+    //     relatedArtists={relatedArtists}
+    //     isPending={artistDataPending}
+    //     isSuccess={artistDataSuccess}
+    //   />
+    // ),
     albums: (
       <TabContents.Albums
         albums={albums}

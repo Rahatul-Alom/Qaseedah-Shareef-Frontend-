@@ -10,7 +10,7 @@ export default function useTheme() {
 
   const { currentUser } = useCurrentUser();
   const { user } = currentUser || {};
-  const theme = themeLS || user?.prefs || defaultThemeConfig;
+  const theme = defaultThemeConfig;
 
   return [theme, setTheme];
 }

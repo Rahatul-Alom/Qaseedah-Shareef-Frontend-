@@ -11,6 +11,7 @@ export default function Home() {
     isPending: isRecentPlayedDataPending,
     isSuccess: isRecentPlayedDataSucsess,
   } = useFetchRecentPlayed();
+
   const {
     data: topChartData,
     isPending: isTopChartDataPending,
@@ -25,15 +26,15 @@ export default function Home() {
     id: "0",
   });
 
-  const { artists, tracks } = topChartData || {};
-  console.log(artists, tracks);
+  const { artists, tracks, albums } = topChartData || {};
+  console.log('artists, tracks', artists, tracks);
 
   const { releases } = newReleases || {};
 
   return (
     <section className="home_page">
       <div className="flex flex-col gap-y-16">
-        {recentPlayed && recentPlayed?.length ? (
+        {/* {recentPlayed && recentPlayed?.length ? (
           <div className="relative">
             <Sections.MediaSectionMinified
               data={recentPlayed}
@@ -49,21 +50,21 @@ export default function Home() {
               isSuccess={isRecentPlayedDataSucsess}
             />
           </div>
-        ) : null}
+        ) : null} */}
 
-        <Sections.MediaSection
+        {/* <Sections.MediaSection
           data={tracks?.data}
-          title="home"
+          title="Home"
           subTitle="Explore sonic realms with our home feature."
-          type="playlist"
+          type="tracks"
           cardItemNumber={10}
           isLoading={isTopChartDataPending}
           isSuccess={isTopChartDataSuccess}
-        />
+        /> */}
 
         <Sections.MediaSection
           data={artists?.data}
-          title="Suggested Artists"
+          title="Top Artists"
           subTitle="home new sounds with handpicked artists tailored to your taste."
           skeletonItemNumber={5}
           randomListNumber={5}
@@ -73,7 +74,8 @@ export default function Home() {
           isSuccess={isTopChartDataSuccess}
         />
 
-        {/* <Sections.MediaSection
+
+        <Sections.MediaSection
           data={albums?.data}
           title="Editor's Picks"
           subTitle="Curation of standout tracks."
@@ -81,9 +83,9 @@ export default function Home() {
           type="album"
           isLoading={isTopChartDataPending}
           isSuccess={isTopChartDataSuccess}
-        /> */}
+        />
 
-        <Sections.MediaSection
+        {/* <Sections.MediaSection
           data={releases?.data}
           title="New Releases"
           subTitle="home fresh and latest soundscapes in our collection."
@@ -91,7 +93,7 @@ export default function Home() {
           type="album"
           isLoading={isNewReleaseDataPending}
           isSuccess={isNewReleaseDataSuccess}
-        />
+        /> */}
 
         {/* <Sections.MediaSection
           data={podcasts?.data}

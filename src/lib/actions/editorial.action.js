@@ -10,11 +10,19 @@ export const useFetchTopCharts = () => {
     queryFn: async () => {
     
 
-      const data = await apiQuery({
+      const tracks = await apiQuery({
         endpoint: `tracks`,
       });
 
-      const resp = { ["tracks"]: data };
+      const artists = await apiQuery({
+        endpoint: `artists`,
+      });
+
+      const albums = await apiQuery({
+        endpoint: `albums`,
+      });
+
+      const resp = { ["tracks"]: tracks, ["artists"]: artists, ["albums"]: albums };
       console.log("resp",resp);
       return resp;
     },
