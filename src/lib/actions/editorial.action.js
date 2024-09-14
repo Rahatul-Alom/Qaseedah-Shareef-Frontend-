@@ -3,28 +3,19 @@ import { useMutation, useQuery } from "@tanstack/react-query";
 
 import { apiQuery } from "@/lib/helpers";
 
-export const useFetchTopCharts = (params) => {
+export const useFetchTopCharts = () => {
   const { isPending, isSuccess, isError, isFetching, error, data } = useQuery({
-    queryKey: ["tracks", params],
+    queryKey: ["topCharts"],
 
     queryFn: async () => {
-      const { tracks } = params ?? {};
-      console.log("Fetching top charts with params:", params);
+    
 
-      if (!(tracks)) {
-        throw new Error("Invalid params");
-      }
       const data = await apiQuery({
         endpoint: `tracks`,
       });
 
-      let resp;
-      if (["tracks"].includes(tracks)) {
-        resp = data;
-      } else {
-        resp = {[tracks]: data };
-      }
-
+      const resp = { ["tracks"]: data };
+      console.log("resp",resp);
       return resp;
     },
   });
