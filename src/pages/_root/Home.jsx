@@ -77,7 +77,7 @@ export default function Home() {
 
         <Sections.MediaSection
           data={albums?.data}
-          title="Editor's Picks"
+          title="Top Albums"
           subTitle="Curation of standout tracks."
           cardItemNumber={10}
           type="album"

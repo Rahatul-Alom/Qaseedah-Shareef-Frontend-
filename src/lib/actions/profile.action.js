@@ -8,6 +8,8 @@ import {
   updatePassword,
   updateProfile,
 } from "@firebase/auth";
+import { defaultThemeConfig } from "@/configs";
+
 
 import { useCurrentUser } from "@/lib/store";
 import { fbUpdateDoc, uploadImage, } from "@/lib/helpers";
@@ -29,6 +31,7 @@ export const useGetProfile = () => {
       setPlayerLS(doc?.data()?.player);
       getUserProfile(doc?.data());
     };
+    
 
     // const unsub = ({
     //   collection: "users",
@@ -99,8 +102,6 @@ export const useUpdateProfile = () => {
 export const useUpdateAccountTheme = () => {
   const [, setThemeLS] = useLocalStorage("groove-theme-config");
 
-  const { currentUser } = useCurrentUser();
-  const { userId } = currentUser || {};
 
   const {
     mutate: updateTheme,
@@ -108,25 +109,14 @@ export const useUpdateAccountTheme = () => {
     isSuccess: isSubmitted,
   } = useMutation({
     mutationFn: async (prefs) => {
-      if (userId) {
-        try {
-          await fbUpdateDoc({
-            data: { prefs },
-            collection: "users",
-            id: userId,
-          });
-        } catch (err) {
-          console.error("error", err);
-        }
-      } else {
+      console.log("prefs", prefs);
+      
         setThemeLS(prefs);
-      }
     },
   });
 
   return { updateTheme, isSubmitting, isSubmitted };
 };
-
 export const useUpdateAccountPlayer = () => {
   const [, setPlayerLS] = useLocalStorage("groove-player");
 

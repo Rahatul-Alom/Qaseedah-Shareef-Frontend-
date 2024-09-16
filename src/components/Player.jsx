@@ -66,15 +66,18 @@ const PlayerProgressBar = ({
 const PlayerButtons = ({ audioIconList }) => {
   return (
     <div className="flex items-center gap-4">
-      {audioIconList.map((item) => (
-        <button key={item.icon} onClick={item.handleClick}>
-          <Icon
-            name={item.icon}
-            size={item.iconSize}
-            className={classNames(item.className, "text-player") || ""}
-          />
-        </button>
-      ))}
+      {audioIconList.map((item) => {
+        // console.log('item',item);
+        return (
+          <button key={item.icon} onClick={item.handleClick}>
+            <Icon
+              name={item.icon}
+              size={item.iconSize}
+              className={classNames(item.className, "text-player") || ""}
+            />
+          </button>
+        );
+      })}
     </div>
   );
 };

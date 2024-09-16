@@ -133,7 +133,7 @@ export const getFormatData = (arr, image_alt) => {
           artistName: item?.artist?.name,
           genres: item?.genres,
           type: item?.type,
-          duration: item?.duration,
+          duration: item?.duration ,
           releaseDate: item?.release_date || item?.creation_date,
           contributors: item?.contributors,
           tracksNo: item?.track_total || item?.nb_tracks,

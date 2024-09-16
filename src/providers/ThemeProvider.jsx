@@ -11,19 +11,21 @@ import { defaultThemeConfig } from "@/configs";
 import { ThemeSwitcher } from "@/components";
 
 export default function ThemeProvider({ children }) {
-  const { currentUser } = useCurrentUser();
+  // const { currentUser } = useCurrentUser();
 
-  const { userId } = currentUser || {};
+  // const { userId } = currentUser || {};
   const [theme, setTheme] = useTheme();
-  const [themeLS] = useLocalStorage("groove-theme-config", defaultThemeConfig);
+  // const [themeLS] = useLocalStorage("groove-theme-config", defaultThemeConfig);
 
   const isMobile = useMediaQuery({
     query: "(min-width: 1024px)",
   });
 
+  
+
   useEffect(() => {
-    setTheme({ ...theme, ...themeLS, isMobile: !isMobile });
-  }, [isMobile, userId]);
+    setTheme({ ...theme, isMobile: !isMobile });
+  }, [isMobile]);
 
   if (!theme?.color) {
     return <>Loading rrr..</>;
