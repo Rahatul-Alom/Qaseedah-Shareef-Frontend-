@@ -10,10 +10,7 @@ const TopPlay = () => {
     data: tracks,
     isPending: chartsDataPending,
     isSuccess: chartsDataSuccess,
-  } = useFetchChartBySection({
-    id: "0",
-    section: "tracks",
-  });
+  } = useFetchChartBySection();
 
   const topPickId = useId();
 

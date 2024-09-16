@@ -147,7 +147,7 @@ export const useFetchArtist = ({ id }) => {
     queryFn: async () => {
       try {
         if (id) {
-          const limit = "?limit=20";
+          // const limit = "?limit=20";
 
           const [
             details,
@@ -157,12 +157,12 @@ export const useFetchArtist = ({ id }) => {
             playlists,
             radios,
           ] = await Promise.all([
-            apiQuery({ endpoint: `artist/${id}` }),
-            apiQuery({ endpoint: `artist/${id}/top${limit}` }),
-            apiQuery({ endpoint: `artist/${id}/albums${limit}` }),
-            apiQuery({ endpoint: `artist/${id}/related${limit}` }),
-            apiQuery({ endpoint: `artist/${id}/playlists${limit}` }),
-            apiQuery({ endpoint: `artist/${id}/radio` }),
+            apiQuery({ endpoint: `artists/${id}` }),
+            // apiQuery({ endpoint: `artist/${id}/top${limit}` }),
+            apiQuery({ endpoint: `artists/${id}/albums` }),
+            // apiQuery({ endpoint: `artist/${id}/related${limit}` }),
+            // apiQuery({ endpoint: `artist/${id}/playlists${limit}` }),
+            // apiQuery({ endpoint: `artist/${id}/radio` }),
           ]);
 
           return {
@@ -185,22 +185,22 @@ export const useFetchArtist = ({ id }) => {
   return { isPending, isSuccess, isError, isFetching, error, data };
 };
 
-export const useFetchChartBySection = ({ id, section }) => {
+export const useFetchChartBySection = () => {
   const { isPending, isSuccess, isError, isFetching, error, data } = useQuery({
-    queryKey: [`chartsBySection_${section}_${id}`, { id, section }],
+    queryKey: [`chartsBySection_tracks_0`], // todo: recheck
     queryFn: async () => {
       try {
-        if (id && section) {
+        // if (id && section) {
           const response = await apiQuery({
             endpoint: `tracks`,
           });
 
           return response;
-        } else {
-          return null;
-        }
+        // } else {
+        //   return null;
+        // }
       } catch (error) {
-        // console.log(error);
+        console.log(error);
       }
     },
   });
@@ -259,14 +259,14 @@ export const useFetchTracks = () => {
 
   const { mutate: fetchTracks, isPending: isSubmitting } = useMutation({
     mutationFn: async (params) => {
-      const { id, type, callback } = params || {};
+      const { id, callback } = params || {};
 
-      if (id && type) {
+      if (id) {
         try {
           setGetId(id);
 
           const response = await apiQuery({
-            endpoint: `${id}/tracks`,
+            endpoint: `tracks/${id}`,
           });
 
           if (callback) callback(response.data);

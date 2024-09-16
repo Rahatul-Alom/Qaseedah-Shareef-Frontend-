@@ -11,14 +11,17 @@ import { Icon, MetaDetailsMediaCard } from "@/components";
 export default function MediaCard({ item, type }) {
   const navigate = useNavigate();
 
-  const { playlistId, playlistType } = usePlayerStore();
+  const { playlistId, playlistType, trackId } = usePlayerStore();
 
   const { fetchTracks, isSubmitting, getId } = useFetchTracks();
 
   const { handlePlayPause, handleGetPlaylist, isPlaying } = usePlayer();
 
+  const trackFormatted = useMemo(() => getFormatData(item), [item]);
+
+
   const isTypeTopClick = useMemo(
-    () => ["genre", "podcast", "artist", "tracks"].includes(type),
+    () => ["genre", "podcast", "artist"].includes(type),
     [type]
   );
 
@@ -27,6 +30,21 @@ export default function MediaCard({ item, type }) {
     [type]
   );
 
+  const handleTrackClick = ({ id, type, index}) => {
+    // console.log({ id, type, index });
+    if (trackId === id) {
+      handlePlayPause();
+    } else {
+      handleGetPlaylist({
+        tracklist: trackFormatted,
+        playlistId: playlistId,
+        playlistType: playlistType,
+        trackIndex: index,
+        trackId: id,
+        trackType: type,
+      });
+    }
+  };
   return (
     <div
       className={classNames(
@@ -72,7 +90,8 @@ export default function MediaCard({ item, type }) {
           )}
           {!isTypeTopClick && (
             <div className="play_button absolute -translate-y-[30%] -translate-x-[50%] top-[50%] left-[50%]">
-              {playlistId === item.id && playlistType === type ? (
+              {/* {playlistId === item.id && playlistType === type ? 
+              (
                 <button
                   className="flex items-center justify-center w-10 h-10 rounded-full shadow-dialog primary_linear"
                   onClick={(e) => {
@@ -82,6 +101,36 @@ export default function MediaCard({ item, type }) {
                 >
                   <Icon
                     name={isPlaying ? "BsFillPauseFill" : "BsFillPlayFill"}
+                    className="!text-white"
+                    size={24}
+                  />
+                </button>
+              ) :  */}
+              {(type === "tracks" ? (
+                <button
+                  className={classNames(
+                    "h-10 w-10 rounded-full shadow-play-button flex items-center justify-center primary_linear group-hover:translate-y-0  duration-300 transition-all",
+                    isSubmitting && getId == item?.id
+                      ? "translate-y-0"
+                      : "translate-y-28"
+                  )}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    handleTrackClick({
+                      id: item?.id,
+                      type: item?.type,
+                      index: item?.index,
+                      // playlist_Id: item?.id,
+                      // playlist_Type: item?.type,
+                    });
+                  }}
+                >
+                  <Icon
+                    name={
+                      isSubmitting
+                        ? "HiOutlineDotsHorizontal"
+                        : "BsFillPlayFill"
+                    }
                     className="!text-white"
                     size={24}
                   />
@@ -122,7 +171,7 @@ export default function MediaCard({ item, type }) {
                     size={24}
                   />
                 </button>
-              )}
+              ))}
             </div>
           )}
         </div>

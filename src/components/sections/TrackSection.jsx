@@ -36,6 +36,7 @@ export default function TrackSection({
   const trackFormatted = useMemo(() => getFormatData(data), [data]);
 
   const handleTrackClick = ({ id, type, index }) => {
+    console.log({ id, type, index });
     if (trackId === id) {
       handlePlayPause();
     } else {

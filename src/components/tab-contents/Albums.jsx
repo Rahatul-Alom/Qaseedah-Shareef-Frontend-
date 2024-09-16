@@ -1,6 +1,7 @@
 import { Sections } from "@/components";
 
 export default function Albums({ albums, isPending, isSuccess }) {
+  console.log("albums", albums);
   return (
     <div className="relative mt-8 album_tab_content">
       <Sections.MediaSection

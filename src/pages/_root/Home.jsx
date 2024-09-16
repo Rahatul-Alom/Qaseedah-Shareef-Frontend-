@@ -3,7 +3,7 @@ import {
   useFetchTopCharts,
   useFetchNewReleases,
 } from "@/lib/actions";
-import { Sections } from "@/components";
+import { Sections, TopPlay } from "@/components";
 
 export default function Home() {
   const {
@@ -52,7 +52,7 @@ export default function Home() {
           </div>
         ) : null} */}
 
-        {/* <Sections.MediaSection
+        <Sections.MediaSection
           data={tracks?.data}
           title="Home"
           subTitle="Explore sonic realms with our home feature."
@@ -60,22 +60,25 @@ export default function Home() {
           cardItemNumber={10}
           isLoading={isTopChartDataPending}
           isSuccess={isTopChartDataSuccess}
-        /> */}
+        />
 
-        <Sections.MediaSection
+{/* <TopPlay /> */}
+
+        {/* <Sections.MediaSection
           data={artists?.data}
           title="Top Artists"
           subTitle="home new sounds with handpicked artists tailored to your taste."
-          skeletonItemNumber={5}
-          randomListNumber={5}
+          skeletonItemNumber={10}
+          randomListNumber={10}
           cardItemNumber={10}
           type="artist"
           isLoading={isTopChartDataPending}
           isSuccess={isTopChartDataSuccess}
-        />
+        /> */}
 
-
-        <Sections.MediaSection
+          {/* {console.log("albums", albums)} */}
+          
+        {/* <Sections.MediaSection
           data={albums?.data}
           title="Top Albums"
           subTitle="Curation of standout tracks."
@@ -83,7 +86,7 @@ export default function Home() {
           type="album"
           isLoading={isTopChartDataPending}
           isSuccess={isTopChartDataSuccess}
-        />
+        /> */}
 
         {/* <Sections.MediaSection
           data={releases?.data}

@@ -127,7 +127,7 @@ export const getFormatData = (arr, image_alt) => {
             item?.description ||
             item?.details?.description,
 
-          albumId: item?.album?.id,
+          albumId: item?.album_id,
           albumTitle: item?.album?.title,
           artistId: item?.artist?.id,
           artistName: item?.artist?.name,
