@@ -30,8 +30,8 @@ export const useAppModal = create((set) => ({
 
 export const usePlayerStore = create((set) => ({
   tracklist: [],
-  playlistId: null,
-  playlistType: null,
+  // playlistId: null,
+  // playlistType: null,
   trackIndex: 0,
   trackId: null,
   trackType: null,

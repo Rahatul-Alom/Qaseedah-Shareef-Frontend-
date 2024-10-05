@@ -38,7 +38,7 @@ export const useAuthState = () => {
       // Log the token for debugging purposes
       console.log("Token found:", token);
 
-      axios.get('http://127.0.0.1:8000/api/v1/user', {
+      axios.get('https://127.0.0.1:8000/api/v1/user', {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -89,7 +89,7 @@ export const useLogin = () => {
   const { mutate: login, isPending: isSubmitting, isSuccess: isSubmitted } = useMutation({
     mutationFn: async (values) => {
       try {
-        const res = await axios.post('http://127.0.0.1:8000/api/v1/login', values);
+        const res = await axios.post('https://127.0.0.1:8000/api/v1/login', values);
 
         if (res.data.success) {
           // Store the token and set axios default header
@@ -155,7 +155,7 @@ export const useRegister = () => {
     mutationFn: async (values) => {
       try {
         // Make API call to register the user
-        const res = await axios.post('http://127.0.0.1:8000/api/v1/register', values);
+        const res = await axios.post('https://127.0.0.1:8000/api/v1/register', values);
 
         if (res.data.success) {
           // Proceed with Firebase registration
@@ -317,7 +317,7 @@ export const useLogout = () => {
       const token = localStorage.getItem('token');
       
       if (token) {
-        const response = await axios.post('http://127.0.0.1:8000/api/v1/logout', {}, {
+        const response = await axios.post('https://127.0.0.1:8000/api/v1/logout', {}, {
           headers: {
             Authorization: `Bearer ${token}`,
           },

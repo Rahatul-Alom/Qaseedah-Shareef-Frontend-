@@ -119,7 +119,7 @@ export const getFormatData = (arr, image_alt) => {
           image:
             item?.cover_image ||
             item?.cover_image ||
-            item?.album?.cover_image ||
+            item?.cover_image ||
             image_alt,
           name: item?.title || item?.name,
           desc:

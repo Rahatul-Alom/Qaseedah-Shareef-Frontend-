@@ -64,7 +64,7 @@ export default function Home() {
 
 {/* <TopPlay /> */}
 
-        {/* <Sections.MediaSection
+        <Sections.MediaSection
           data={artists?.data}
           title="Top Artists"
           subTitle="home new sounds with handpicked artists tailored to your taste."
@@ -74,11 +74,11 @@ export default function Home() {
           type="artist"
           isLoading={isTopChartDataPending}
           isSuccess={isTopChartDataSuccess}
-        /> */}
+        />
 
           {/* {console.log("albums", albums)} */}
           
-        {/* <Sections.MediaSection
+        <Sections.MediaSection
           data={albums?.data}
           title="Top Albums"
           subTitle="Curation of standout tracks."
@@ -86,7 +86,7 @@ export default function Home() {
           type="album"
           isLoading={isTopChartDataPending}
           isSuccess={isTopChartDataSuccess}
-        /> */}
+        />
 
         {/* <Sections.MediaSection
           data={releases?.data}

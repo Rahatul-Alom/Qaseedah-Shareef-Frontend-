@@ -11,7 +11,7 @@ import { Icon, MetaDetailsMediaCard } from "@/components";
 export default function MediaCard({ item, type }) {
   const navigate = useNavigate();
 
-  const { playlistId, playlistType, trackId } = usePlayerStore();
+  const { playlistId, playlistType } = usePlayerStore();
 
   const { fetchTracks, isSubmitting, getId } = useFetchTracks();
 
@@ -31,8 +31,8 @@ export default function MediaCard({ item, type }) {
   );
 
   const handleTrackClick = ({ id, type, index}) => {
-    // console.log({ id, type, index });
-    if (trackId === id) {
+    console.log({ id, type, index });
+    if (playlistId === id) {
       handlePlayPause();
     } else {
       handleGetPlaylist({
@@ -43,6 +43,7 @@ export default function MediaCard({ item, type }) {
         trackId: id,
         trackType: type,
       });
+      console.error("Track not found");
     }
   };
   return (
