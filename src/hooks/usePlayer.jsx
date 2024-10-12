@@ -231,6 +231,7 @@ export default function usePlayer() {
   const getTimer = `${formatTime(timer)} / ${formatTime(duration)}`;
 
   const handleGetPlaylist = (data) => {
+    console.log(data);
     autoplay = true;
 
     if (data?.tracklist) {

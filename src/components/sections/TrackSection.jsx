@@ -82,25 +82,25 @@ export default function TrackSection({
               <ul className="flex flex-col w-full list-none">
                 {trackFormatted?.length &&
                   trackFormatted?.map((item) => {
-                    return (
-                      <Cards.TrackCard
-                        key={item.id}
-                        item={item}
-                        {...{
-                          item,
-                          trackId,
-                          trackType,
-                          playlistId,
-                          details,
-                          isPlaying,
-                          myPlaylistId,
-                          listDivider,
-                          disableRowList,
-                          handleTrackClick,
-                          imageDims,
-                        }}
-                      />
-                    );
+                    // return (
+                      // <Cards.TrackCard
+                      //   key={item.id}
+                      //   item={item}
+                      //   {...{
+                      //     item,
+                      //     trackId,
+                      //     trackType,
+                      //     playlistId,
+                      //     details,
+                      //     isPlaying,
+                      //     myPlaylistId,
+                      //     listDivider,
+                      //     disableRowList,
+                      //     handleTrackClick,
+                      //     imageDims,
+                      //   }}
+                      // />
+                    // );
                   })}
               </ul>
             </div>

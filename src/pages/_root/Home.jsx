@@ -4,6 +4,8 @@ import {
   useFetchNewReleases,
 } from "@/lib/actions";
 import { Sections, TopPlay } from "@/components";
+import {useId} from "react";
+import HomeSection from "../../components/sections/HomeSection.jsx";
 
 export default function Home() {
   const {
@@ -11,7 +13,7 @@ export default function Home() {
     isPending: isRecentPlayedDataPending,
     isSuccess: isRecentPlayedDataSucsess,
   } = useFetchRecentPlayed();
-
+  const topPickId = useId();
   const {
     data: topChartData,
     isPending: isTopChartDataPending,
@@ -52,12 +54,26 @@ export default function Home() {
           </div>
         ) : null} */}
 
-        <Sections.MediaSection
+        <HomeSection
           data={tracks?.data}
-          title="Home"
-          subTitle="Explore sonic realms with our home feature."
-          type="tracks"
-          cardItemNumber={10}
+          details={{
+            id: topPickId,
+            type: "chart",
+          }}
+          disableHeader
+          disableRowList={[
+            "no",
+            "album",
+            "duration",
+            "more_button",
+            "like_button",
+            "dateCreated",
+          ]}
+          imageDims="11"
+          enableTitle
+          titleName="Home"
+          titleType="medium"
+          titleDivider={false}
           isLoading={isTopChartDataPending}
           isSuccess={isTopChartDataSuccess}
         />
